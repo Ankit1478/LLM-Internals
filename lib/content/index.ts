@@ -9,6 +9,13 @@ import { tokensTokenization } from './tokens-tokenization';
 import { positionalEncoding } from './positional-encoding';
 import { transformersArchitecture } from './transformers-architecture';
 import { selfAttention } from './self-attention';
+import { multiHeadAttention } from './multi-head-attention';
+import { feedForwardNetworks } from './feed-forward-networks';
+import { layerNormalization } from './layer-normalization';
+import { residualConnections } from './residual-connections';
+import { attentionComplexity } from './attention-complexity';
+import { causalMasking } from './causal-masking';
+import { multiQueryAttention } from './multi-query-attention';
 import { basicConcepts } from './basic-concepts';
 import { advancedTopics } from './advanced-topics';
 import { codeExamples } from './code-examples';
@@ -26,6 +33,13 @@ const articles: Record<string, Article> = {
   'positional-encoding': positionalEncoding,
   'transformers-architecture': transformersArchitecture,
   'self-attention': selfAttention,
+  'multi-head-attention': multiHeadAttention,
+  'feed-forward-networks': feedForwardNetworks,
+  'layer-normalization': layerNormalization,
+  'residual-connections': residualConnections,
+  'attention-complexity': attentionComplexity,
+  'causal-masking': causalMasking,
+  'multi-query-attention': multiQueryAttention,
   'basic-concepts': basicConcepts,
   'advanced-topics': advancedTopics,
   'code-examples': codeExamples,
