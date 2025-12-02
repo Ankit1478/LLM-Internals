@@ -10,374 +10,307 @@ export const residualConnections: Article = {
   nextTopic: { module: 2, slug: 'attention-complexity', title: '9. Attention Mechanics & Complexity' },
   content: `# Residual Connections
 
+## Part of Transformer Architecture
+
+We're continuing to build the Transformer:
+
+**Lesson 4:** Self-Attention (Done!)
+**Lesson 5:** Multi-Head Attention (Done!)
+**Lesson 6:** Feed-Forward Networks (Done!)
+**Lesson 7:** Layer Normalization (Done!)
+**Lesson 8:** Residual Connections (This lesson)
+
+## For Full-Stack Developers
+
+If you're coming from web development, think of Residual Connections like:
+
+**Middleware in Express.js:**
+\`\`\`javascript
+// Without residual: data gets transformed
+app.use((req, res, next) => {
+    req.data = transform(req.data); // Original lost!
+    next();
+});
+
+// With residual: keep original + add changes
+app.use((req, res, next) => {
+    req.data = req.data + transform(req.data); // Original preserved!
+    next();
+});
+\`\`\`
+
+**Why this matters for AI in web apps:**
+- Deep models (like GPT) use residual connections
+- Understanding this helps you debug model behavior
+- Important when fine-tuning models for your app
+
 ## What are Residual Connections?
 
-Residual connections (also called **skip connections**) are like having a **shortcut path** that allows information to bypass layers and flow directly through the network.
+**Residual Connections** = A shortcut that adds the original input back to the output
 
-Think of it as taking an express elevator instead of walking up stairs - you still get to the top, but you keep what you started with!
-
-## The Simple Idea
-
-Instead of:
-\`\`\`
-Input → Layer → Output
-\`\`\`
-
-We do:
-\`\`\`
-Input → Layer → Output
-  ↓              ↑
-  └──────────────┘  (Add the input back!)
+**Simple Idea:**
+\`\`\`plaintext
+Normal:    Input → Layer → Output
+Residual:  Input → Layer → Output + Input
+                            ↑       ↑
+                         new stuff + original
 \`\`\`
 
-**Formula:**
-\`\`\`
+**The Formula:**
+\`\`\`plaintext
 Output = Layer(Input) + Input
-
-This simple addition changes everything!
 \`\`\`
 
-## Real-Life Analogy
+That's it! Just addition.
 
-Imagine you're editing a photo:
+## Real-World Example
+
+Think of editing a document:
 
 **Without Residual:**
-> Start with photo → Apply filter → Get result
-> If filter is bad, original photo is lost forever!
+\`\`\`plaintext
+Original text → Edit → Edited version
+(original is gone!)
+\`\`\`
 
 **With Residual:**
-> Start with photo → Apply filter → Add back original
-> Now you have: original + enhancements
-> If filter is bad, you still have the original!
+\`\`\`plaintext
+Original text → Edit → Original + Edits
+(you keep both!)
+\`\`\`
 
-## Why Do We Need Them?
+Like Git - you keep the original and add changes on top!
 
-### The Vanishing Gradient Problem
+## Why Do We Need This?
 
-When training deep networks (like 100+ layers):
+**The Problem:** Information gets lost in deep networks
 
 **Without Residual Connections:**
+\`\`\`plaintext
+Layer 1:  Data = 100%
+Layer 10: Data = 50% (getting weaker)
+Layer 50: Data = 5% (almost gone)
+Layer 100: Data = 0.1% (lost!)
 \`\`\`
-Layer 1: Signal strength = 100%
-Layer 10: Signal strength = 50%
-Layer 50: Signal strength = 5%
-Layer 100: Signal strength = 0.001%  ← Almost dead!
-\`\`\`
-
-Information gets weaker and weaker until it disappears!
 
 **With Residual Connections:**
-\`\`\`
-Layer 1: Signal = 100% (original always flows through!)
-Layer 10: Signal = 100% (shortcut keeps it alive!)
-Layer 50: Signal = 100% (still strong!)
-Layer 100: Signal = 100% (information preserved! ✅)
+\`\`\`plaintext
+Layer 1:  Data = 100% (shortcut keeps it!)
+Layer 10: Data = 100% (still strong!)
+Layer 50: Data = 100% (still here!)
+Layer 100: Data = 100% (preserved!)
 \`\`\`
 
-## Visual Flow
+The shortcut ensures the original information never gets lost!
+
+## Visual Diagram
 
 \`\`\`mermaid
 flowchart LR
-    X["Input x"]
-    F["Layer/Function F(x)"]
-    Add["Add (+)"]
-    Out["Output<br/>F(x) + x"]
-    
-    X --> F
-    F --> Add
-    X -.Shortcut/Skip.-> Add
-    Add --> Out
-    
-    style X fill:#3b82f6,color:#fff
-    style Add fill:#f59e0b,color:#fff
-    style Out fill:#22c55e,color:#fff
-\`\`\`
+    Input["Input"]
+    Layer["Process Layer"]
+    Add["Add Together"]
+    Output["Output"]
 
-The dotted line is the **residual/skip connection**!
+    Input --> Layer
+    Layer --> Add
+    Input -.Shortcut.-> Add
+    Add --> Output
 
-## In Transformers: Two Skip Connections
-
-Each transformer block has **two residual connections**:
-
-\`\`\`mermaid
-flowchart TD
-    X["Input x"]
-    
-    subgraph Block["Transformer Block"]
-        LN1["LayerNorm"]
-        MHA["Multi-Head Attention"]
-        Add1["Add (+)<br/>Skip Connection 1"]
-        
-        LN2["LayerNorm"]
-        FFN["Feed-Forward"]
-        Add2["Add (+)<br/>Skip Connection 2"]
-    end
-    
-    Out["Output"]
-    
-    X --> LN1
-    LN1 --> MHA
-    MHA --> Add1
-    X -.Skip 1.-> Add1
-    
-    Add1 --> LN2
-    LN2 --> FFN
-    FFN --> Add2
-    Add1 -.Skip 2.-> Add2
-    
-    Add2 --> Out
-    
-    style X fill:#3b82f6,color:#fff
-    style Add1 fill:#f59e0b,color:#fff
-    style Add2 fill:#f59e0b,color:#fff
-    style Out fill:#22c55e,color:#fff
-\`\`\`
-
-## The Math is Simple!
-
-**First Residual Connection:**
-\`\`\`
-x₁ = x + MultiHeadAttention(LayerNorm(x))
-     ↑                                    
-     └─ This is the skip connection (adding original x)
-\`\`\`
-
-**Second Residual Connection:**
-\`\`\`
-x₂ = x₁ + FeedForward(LayerNorm(x₁))
-      ↑
-      └─ Another skip connection (adding x₁)
-\`\`\`
-
-Just addition! But incredibly powerful.
-
-## Why It Works: Identity Mapping
-
-If a layer isn't helpful, the network can learn to **ignore it**:
-
-**What the layer learns:**
-\`\`\`
-If this layer is useful:
-  Output = Input + Transformations
-
-If this layer is NOT useful:
-  Output = Input + 0
-  Output = Input  (layer becomes identity!)
-\`\`\`
-
-The network can easily learn to set transformations to zero and keep the input unchanged!
-
-## Gradient Flow: The Real Magic
-
-### Without Residual Connections
-
-During backpropagation (learning):
-\`\`\`
-Layer 100 ← Layer 99 ← Layer 98 ← ... ← Layer 1
-  0.01   ×   0.01   ×   0.01  ×  ... ×  gradient
-
-Result: 0.01^100 ≈ 0  (vanished!)
-\`\`\`
-
-### With Residual Connections
-
-\`\`\`
-Gradients flow through TWO paths:
-1. Through the layers (may get small)
-2. Through the skip connection (stays strong!)
-
-Layer 100 ←──┬── Layer 99 (weak)
-              │
-              └── Skip (strong! ✅)
-
-Gradients reach early layers intact!
-\`\`\`
-
-## Complete Flow Example
-
-Let's trace a value through one transformer block:
-
-\`\`\`
-Input: x = [1, 2, 3, 4]
-
-Step 1: LayerNorm
-  normalized = [−1, 0, 0.5, 1]
-
-Step 2: Multi-Head Attention
-  attention_out = [0.5, 1, 1.5, 2]
-
-Step 3: Add Residual (Skip Connection 1)
-  x₁ = x + attention_out
-     = [1, 2, 3, 4] + [0.5, 1, 1.5, 2]
-     = [1.5, 3, 4.5, 6]  ← Original preserved!
-
-Step 4: LayerNorm
-  normalized = [−1.2, 0, 0.6, 1.2]
-
-Step 5: Feed-Forward
-  ffn_out = [0.2, 0.5, 0.8, 1.2]
-
-Step 6: Add Residual (Skip Connection 2)
-  x₂ = x₁ + ffn_out
-     = [1.5, 3, 4.5, 6] + [0.2, 0.5, 0.8, 1.2]
-     = [1.7, 3.5, 5.3, 7.2]  ← Both originals preserved!
-\`\`\`
-
-Notice: We never "lost" the original input!
-
-## Historical Context: ResNet Revolution
-
-Residual connections were introduced in **ResNet (2015)** for image recognition.
-
-**Before ResNet:**
-- 20 layers: Works okay
-- 50 layers: Training starts failing
-- 100 layers: Doesn't train at all
-
-**After ResNet (with residual connections):**
-- 50 layers: Works great!
-- 101 layers: Even better!
-- 152 layers: State-of-the-art!
-- 1000+ layers: Possible!
-
-This breakthrough enabled modern transformers!
-
-## Benefits in Transformers
-
-1. **Deep Networks Possible**: GPT-3 has 96 layers!
-2. **Stable Training**: Gradients flow smoothly
-3. **Faster Convergence**: Model learns quicker
-4. **Better Performance**: Deeper = more powerful
-5. **Information Preservation**: Original input never lost
-
-## Pre-Norm Configuration
-
-Modern transformers use **Pre-Norm** with residual connections:
-
-\`\`\`mermaid
-flowchart TD
-    X["x"]
-    
-    subgraph "Pre-Norm Block"
-        LN1["LayerNorm"]
-        Attn["Attention"]
-        Add1["+"]
-        LN2["LayerNorm"]
-        FFN["FFN"]
-        Add2["+"]
-    end
-    
-    X --> LN1 --> Attn --> Add1
-    X -.Residual.-> Add1
-    Add1 --> LN2 --> FFN --> Add2
-    Add1 -.Residual.-> Add2
-    
-    style X fill:#3b82f6,color:#fff
-    style Add1 fill:#f59e0b,color:#fff
-    style Add2 fill:#f59e0b,color:#fff
-\`\`\`
-
-**Key insight:** LayerNorm is applied **before** the layer, making skip connections even more effective!
-
-## Stacking Multiple Blocks
-
-With residual connections, we can stack many transformer blocks:
-
-\`\`\`
-Input
-  ↓ (skip)
-Block 1 → Output₁
-  ↓ (skip)
-Block 2 → Output₂
-  ↓ (skip)
-Block 3 → Output₃
-  ...
-  ↓ (skip)
-Block N → Final Output
-
-Each block adds refinements while preserving original info!
-\`\`\`
-
-## Why Addition (Not Concatenation)?
-
-You might wonder: Why add? Why not concatenate?
-
-**Addition:**
-\`\`\`
-Input: [512 dimensions]
-Layer output: [512 dimensions]
-Add them: [512 dimensions]  ✅ Same size!
-\`\`\`
-
-**Concatenation (not used):**
-\`\`\`
-Input: [512 dimensions]
-Layer output: [512 dimensions]
-Concatenate: [1024 dimensions]  ❌ Size doubles!
-
-After 100 layers: [51,200 dimensions]  💥 Explodes!
-\`\`\`
-
-Addition keeps dimensions constant!
-
-## Common Misconception
-
-**Myth:** "Residual connections just copy the input"
-
-**Reality:** 
-- Residual connections provide a **highway** for information
-- The layers still learn **transformations**
-- The network learns how much of each to use
-- Final output = Original + Learned Transformations
-
-## Visualization: Information Highway
-
-\`\`\`mermaid
-flowchart LR
-    subgraph "Information Flow"
-        Input --> Layer1
-        Layer1 --> Layer2
-        Layer2 --> Layer3
-        Layer3 --> Output
-        
-        Input -.Express Highway.-> Output
-    end
-    
     style Input fill:#3b82f6,color:#fff
+    style Add fill:#f59e0b,color:#fff
     style Output fill:#22c55e,color:#fff
 \`\`\`
 
-The dotted line is the "express highway" that guarantees information reaches the end!
+The dotted line is the **shortcut** that preserves the original!
 
-## Impact on Training
+## Used Twice in Transformers
 
-**Without Residual Connections:**
-- Maximum depth: ~20 layers
-- Training time: Very slow
-- Learning rate: Must be tiny
-- Success rate: Often fails
+Each Transformer block uses residual connections **two times**:
 
-**With Residual Connections:**
-- Maximum depth: 100+ layers ✅
-- Training time: Faster ✅
-- Learning rate: Can be larger ✅
-- Success rate: Very reliable ✅
+\`\`\`mermaid
+flowchart TD
+    Input["Word: 'cat'"]
+
+    Attention["Multi-Head Attention"]
+    Add1["Add Original<br/>(Shortcut 1)"]
+
+    FFN["Feed-Forward Network"]
+    Add2["Add Original<br/>(Shortcut 2)"]
+
+    Output["Smarter 'cat'"]
+
+    Input --> Attention
+    Attention --> Add1
+    Input -.Shortcut 1.-> Add1
+
+    Add1 --> FFN
+    FFN --> Add2
+    Add1 -.Shortcut 2.-> Add2
+
+    Add2 --> Output
+
+    style Input fill:#3b82f6,color:#fff
+    style Add1 fill:#f59e0b,color:#fff
+    style Add2 fill:#f59e0b,color:#fff
+    style Output fill:#22c55e,color:#fff
+\`\`\`
+
+After attention → Add original back
+After feed-forward → Add original back again
+
+## Simple Code Example
+
+\`\`\`python|javascript
+# Residual Connection
+def residual_connection(input_data, layer):
+    # Process through layer
+    output = layer(input_data)
+
+    # Add original back (the shortcut!)
+    result = output + input_data
+
+    return result
+
+# Example
+input_data = [1, 2, 3, 4]
+output = [0.5, 0.5, 0.5, 0.5]
+
+result = output + input_data
+# Result: [1.5, 2.5, 3.5, 4.5]
+# Original [1,2,3,4] is preserved!
+|||
+// Residual Connection
+function residualConnection(inputData, layer) {
+    // Process through layer
+    const output = layer(inputData);
+
+    // Add original back (the shortcut!)
+    const result = output.map((val, i) => val + inputData[i]);
+
+    return result;
+}
+
+// Example
+const inputData = [1, 2, 3, 4];
+const output = [0.5, 0.5, 0.5, 0.5];
+
+const result = output.map((val, i) => val + inputData[i]);
+// Result: [1.5, 2.5, 3.5, 4.5]
+// Original [1,2,3,4] is preserved!
+\`\`\`
+
+## Step-by-Step Example
+
+Let's see how it works with actual numbers:
+
+\`\`\`plaintext
+Input: [2, 4, 6, 8]
+
+Step 1: Process through Attention
+Output from attention: [1, 1, 1, 1]
+
+Step 2: Add Residual (Add original back!)
+Result = [1, 1, 1, 1] + [2, 4, 6, 8]
+       = [3, 5, 7, 9]
+
+Original [2, 4, 6, 8] is preserved in the result!
+\`\`\`
+
+## Why This is Powerful
+
+**Enables Deep Networks:**
+- Without residuals: Can only build ~10 layers
+- With residuals: Can build 100+ layers!
+
+**Example:**
+- GPT-2: 48 layers
+- GPT-3: 96 layers
+- All possible because of residual connections!
+
+**For web developers:** This is why modern AI models can be so powerful - they stack many layers using residual connections.
+
+## Putting It All Together
+
+Here's the complete Transformer block with everything we've learned:
+
+\`\`\`mermaid
+flowchart TD
+    Input["Word: 'cat'"]
+
+    Attention["Multi-Head Attention"]
+    Norm1["Layer Normalization"]
+    Add1["Add Original (Residual 1)"]
+
+    FFN["Feed-Forward Network"]
+    Norm2["Layer Normalization"]
+    Add2["Add Original (Residual 2)"]
+
+    Output["Smarter 'cat'"]
+
+    Input --> Attention
+    Attention --> Norm1
+    Norm1 --> Add1
+    Input -.Shortcut 1.-> Add1
+
+    Add1 --> FFN
+    FFN --> Norm2
+    Norm2 --> Add2
+    Add1 -.Shortcut 2.-> Add2
+
+    Add2 --> Output
+
+    style Input fill:#3b82f6,color:#fff
+    style Add1 fill:#f59e0b,color:#fff
+    style Add2 fill:#f59e0b,color:#fff
+    style Output fill:#22c55e,color:#fff
+\`\`\`
+
+## How This Relates to Web Development
+
+**Backend Processing Analogy:**
+\`\`\`javascript
+// Processing user data through multiple steps
+async function processUserData(userData) {
+    let result = userData; // Start with original
+
+    // Step 1: Process with validation
+    const validated = await validate(result);
+    result = result + validated; // Add back original (residual!)
+
+    // Step 2: Process with enrichment
+    const enriched = await enrich(result);
+    result = result + enriched; // Add back previous (residual!)
+
+    return result; // Contains original + all improvements
+}
+\`\`\`
+
+This is similar to how residual connections work in Transformers!
 
 ## Summary
 
-> **Residual Connections** = Adding the input back to the output, creating a shortcut that preserves information and enables gradient flow in deep networks.
+> **Residual Connections** = Adding the original input back to preserve information
 
-**Think of it as:**
-- 🛣️ A highway for information to flow directly
-- 🔄 A way to preserve original info while adding refinements
-- 🎯 The key enabler of deep transformers (96+ layers!)
+**Remember:**
+1. Simple addition: Output = Input + Layer(Input)
+2. Preserves original information
+3. Enables building deep networks (100+ layers)
+4. Used twice in each Transformer block
 
-**The Formula:**
-\`\`\`
-Output = Layer(Input) + Input
-               ↑          ↑
-          New stuff   Original
-\`\`\`
+**Think of it as:** Keeping the original while adding improvements on top!
+
+## Connection to Previous Topics
+
+| Topic | What It Does |
+|-------|-------------|
+| **Self-Attention** (Lesson 4) | Words look at each other |
+| **Multi-Head Attention** (Lesson 5) | 8 different ways of looking |
+| **Feed-Forward Network** (Lesson 6) | Each word thinks individually |
+| **Layer Normalization** (Lesson 7) | Keep all numbers balanced |
+| **Residual Connections** (This lesson) | Preserve original information |
+
+All these parts work together to make the Transformer work!
 
 ## What's Next?
 
