@@ -21,8 +21,6 @@ It helps each word look at other words in a sentence:
 
 Self-Attention = **1 way of looking** at the sentence.
 
----
-
 ## What is Multi-Head Attention?
 
 **Multi-Head Attention** = Using **multiple self-attentions** at the same time!
@@ -33,8 +31,6 @@ Think of it like having **8 different pairs of eyes**, each noticing different t
 Self-Attention      →  1 pair of eyes
 Multi-Head Attention →  8 pairs of eyes (working together!)
 \`\`\`
-
----
 
 ## Why Do We Need Multiple "Heads"?
 
@@ -47,8 +43,6 @@ Different "heads" can focus on different relationships:
 - **Head 3**: Connects "The" → "cat" (which cat?)
 
 One self-attention might miss some connections. **8 heads** catch more patterns!
-
----
 
 ## Simple Visual
 
@@ -76,8 +70,6 @@ flowchart LR
     style Output fill:#22c55e,color:#fff
 \`\`\`
 
----
-
 ## How It Works (Step by Step)
 
 ### Step 1: Run Multiple Self-Attentions
@@ -96,11 +88,9 @@ Head 1 output + Head 2 output + ... + Head 8 output = Final Output
 
 That's it!
 
----
-
 ## Simple Code Example
 
-\`\`\`python
+\`\`\`python|javascript
 # Step 1: One self-attention (one head)
 def self_attention(sentence):
     # Each word looks at other words
@@ -118,9 +108,28 @@ def multi_head_attention(sentence):
     # Combine all results
     final = combine(results)
     return final
-\`\`\`
+|||
+// Step 1: One self-attention (one head)
+function selfAttention(sentence) {
+    // Each word looks at other words
+    return attentionOutput;
+}
 
----
+// Step 2: Multi-head = Run self-attention 8 times
+function multiHeadAttention(sentence) {
+    const results = [];
+
+    // Run 8 self-attentions
+    for (let i = 0; i < 8; i++) {
+        const output = selfAttention(sentence);
+        results.push(output);
+    }
+
+    // Combine all results
+    const final = combine(results);
+    return final;
+}
+\`\`\`
 
 ## Real-Life Analogy
 
@@ -138,8 +147,6 @@ Imagine you're reading a book:
 
 After 8 readings, you understand the book **much better**!
 
----
-
 ## Why 8 Heads?
 
 **1 Head:**
@@ -152,21 +159,16 @@ After 8 readings, you understand the book **much better**!
 **100 Heads:**
 - Too many, becomes slow and doesn't help much
 
----
-
 ## Summary
 
 > **Multi-Head Attention** = Running **8 self-attentions** at the same time, then combining their results.
 
-**Key Points:**
 1. Self-Attention = 1 way of looking
 2. Multi-Head = 8 ways of looking (8 self-attentions)
 3. More heads = catch more patterns
 4. All heads run **together** (parallel)
 
 **Think of it as:** 8 students reading the same sentence, each noticing different things. Then they share what they found!
-
----
 
 ## Connection to Self-Attention
 
@@ -178,8 +180,6 @@ After 8 readings, you understand the book **much better**!
 | What it does | One attention | Multiple attentions |
 
 Multi-Head Attention is just **multiple self-attentions working together**!
-
----
 
 ## What's Next?
 

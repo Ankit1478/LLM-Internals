@@ -72,6 +72,7 @@ export default function TopicPage() {
   const slug = params.topic as string;
   const article = getArticle(slug);
   const [copied, setCopied] = useState(false);
+  const [codeLanguagePreference, setCodeLanguagePreference] = useState<'python' | 'javascript'>('python');
 
   const copyPageContent = async () => {
     if (!article) return;
@@ -116,7 +117,23 @@ export default function TopicPage() {
     let inCodeBlock = false;
     let codeContent = '';
     let codeLanguage = '';
+    let inTable = false;
+    let tableRows: React.ReactNode[] = [];
     const { theme } = useTheme();
+
+    const finishTable = (currentIndex: number) => {
+      if (inTable && tableRows.length > 0) {
+        elements.push(
+          <div key={`table-${currentIndex}`} className="overflow-x-auto my-4">
+            <table className="w-full border-collapse" style={{ borderColor: 'var(--border)' }}>
+              {tableRows}
+            </table>
+          </div>
+        );
+        tableRows = [];
+        inTable = false;
+      }
+    };
 
     lines.forEach((line, index) => {
       // Code block handling
@@ -130,6 +147,41 @@ export default function TopicPage() {
           if (codeLanguage === 'mermaid') {
             elements.push(
               <MermaidDiagram key={`mermaid-${index}`} chart={codeContent} />
+            );
+          } else if (codeLanguage.includes('|')) {
+            // Multi-language code block (e.g., python|javascript)
+            const languages = codeLanguage.split('|');
+            const codeParts = codeContent.split('|||');
+
+            elements.push(
+              <div key={`code-${index}`} className="my-4">
+                <div className="flex gap-2 mb-2">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => setCodeLanguagePreference(lang as 'python' | 'javascript')}
+                      className="px-3 py-1 text-sm rounded-md transition-all"
+                      style={{
+                        background: codeLanguagePreference === lang ? 'var(--foreground)' : 'var(--muted)',
+                        color: codeLanguagePreference === lang ? 'var(--background)' : 'var(--foreground)',
+                      }}
+                    >
+                      {lang.charAt(0).toUpperCase() + lang.slice(1)}
+                    </button>
+                  ))}
+                </div>
+                <SyntaxHighlighter
+                  language={codeLanguagePreference}
+                  style={theme === 'dark' ? oneDark : oneLight}
+                  customStyle={{
+                    borderRadius: '0.5rem',
+                    padding: '1rem',
+                    fontSize: '0.875rem',
+                  }}
+                >
+                  {codeParts[languages.indexOf(codeLanguagePreference)]?.trim() || codeParts[0]?.trim()}
+                </SyntaxHighlighter>
+              </div>
             );
           } else {
             elements.push(
@@ -220,11 +272,14 @@ export default function TopicPage() {
         return;
       }
 
-      // List items
-      if (line.startsWith('- ') || line.startsWith('* ')) {
-        const content = line.slice(2);
+      // List items (including nested with spaces/tabs)
+      if (line.match(/^[\s]*[-*]\s/)) {
+        const indent = line.match(/^[\s]*/)?.[0].length || 0;
+        const content = line.replace(/^[\s]*[-*]\s/, '');
+        const marginLeft = indent > 0 ? `${(indent / 2) + 2}rem` : '1.5rem';
+
         elements.push(
-          <li key={index} className="ml-6 mb-2" style={{ color: 'var(--foreground)' }}>
+          <li key={index} className="mb-2 list-disc" style={{ color: 'var(--foreground)', marginLeft }}>
             {renderInlineMarkdown(content)}
           </li>
         );
@@ -250,25 +305,28 @@ export default function TopicPage() {
         const cells = line.split('|').filter(cell => cell.trim());
         const isHeader = index > 0 && lines[index + 1]?.match(/^\|[\s\-:|]+\|$/);
 
+        inTable = true;
+
         if (isHeader) {
-          elements.push(
-            <div key={index} className="overflow-x-auto my-4">
-              <table className="w-full border-collapse" style={{ borderColor: 'var(--border)' }}>
-                <thead>
-                  <tr style={{ background: 'var(--muted)' }}>
-                    {cells.map((cell, i) => (
-                      <th key={i} className="border px-4 py-2 text-left font-semibold" style={{ borderColor: 'var(--border)', color: 'var(--foreground)' }}>
-                        {cell.trim()}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-              </table>
-            </div>
+          tableRows.push(
+            <thead key={`thead-${index}`}>
+              <tr style={{ background: 'var(--muted)' }}>
+                {cells.map((cell, i) => (
+                  <th key={i} className="border px-4 py-2 text-left font-semibold" style={{ borderColor: 'var(--border)', color: 'var(--foreground)' }}>
+                    {cell.trim()}
+                  </th>
+                ))}
+              </tr>
+            </thead>
           );
         } else {
-          elements.push(
-            <tr key={index}>
+          // Start tbody if needed
+          if (tableRows.length > 0 && tableRows[tableRows.length - 1]?.type === 'thead') {
+            tableRows.push(<tbody key={`tbody-${index}`}></tbody>);
+          }
+
+          tableRows.push(
+            <tr key={`row-${index}`}>
               {cells.map((cell, i) => (
                 <td key={i} className="border px-4 py-2" style={{ borderColor: 'var(--border)', color: 'var(--foreground)' }}>
                   {cell.trim()}
@@ -280,6 +338,11 @@ export default function TopicPage() {
         return;
       }
 
+      // If we were in a table and hit a non-table line, finish the table
+      if (inTable) {
+        finishTable(index);
+      }
+
       // Regular paragraph
       elements.push(
         <p key={index} className="mb-4 leading-relaxed" style={{ color: 'var(--foreground)' }}>
@@ -287,6 +350,9 @@ export default function TopicPage() {
         </p>
       );
     });
+
+    // Finish any remaining table
+    finishTable(lines.length);
 
     return elements;
   };
