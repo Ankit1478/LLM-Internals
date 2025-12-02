@@ -19,11 +19,24 @@ We're continuing to build the Transformer:
 **Lesson 6:** Feed-Forward Networks (Done!)
 **Lesson 7:** Layer Normalization (This lesson)
 
+## For Full-Stack Developers
+
+If you're a full-stack developer wanting to add AI to your web apps, understanding Layer Normalization helps you:
+
+**In Web Development:**
+- Integrate AI models into your backend (Node.js, Python)
+- Use AI APIs (OpenAI, Hugging Face) more effectively
+- Build features like chatbots, text generation, content moderation
+- Understand why AI responses might be unstable (normalization issues!)
+
+**Real-World Example:**
+When you call an AI API in your Express/FastAPI server, Layer Normalization is running inside the model to keep predictions stable.
+
 ## What is Layer Normalization?
 
 **Layer Normalization** = Keeping numbers balanced so everything works smoothly
 
-Think of it like balancing the volume on different speakers - you want them all at a similar level.
+Think of it like input validation in your backend - you normalize user input to prevent errors. Layer Normalization does the same for AI model values.
 
 ## The Problem
 
@@ -219,6 +232,29 @@ flowchart TD
 4. Makes the Transformer stable
 
 **Simple idea:** Keep all numbers similar so nothing breaks!
+
+## How This Relates to Web Development
+
+**Backend API Integration:**
+\`\`\`javascript
+// When you call an AI API from your Express server
+app.post('/api/chat', async (req, res) => {
+    const response = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: req.body.messages
+    });
+
+    // Layer Normalization is running inside GPT model
+    // to keep responses stable and consistent
+    res.json(response);
+});
+\`\`\`
+
+**Why This Matters for Full-Stack Devs:**
+- You're using models that rely on Layer Normalization
+- Understanding this helps debug AI integration issues
+- Makes you better at choosing and using AI APIs
+- Helps when fine-tuning models for your specific use case
 
 ## Connection to Previous Topics
 
