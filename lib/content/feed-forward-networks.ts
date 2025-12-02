@@ -10,267 +10,332 @@ export const feedForwardNetworks: Article = {
   nextTopic: { module: 2, slug: 'layer-normalization', title: '7. Layer Normalization' },
   content: `# Feed-Forward Networks
 
-## What is a Feed-Forward Network?
+## Part of Transformer Architecture
 
-After attention tells us **which words are related**, the Feed-Forward Network (FFN) processes **each word individually** to extract deeper meaning.
+We're building the Transformer step by step:
 
-Think of it as:
-- **Attention**: "Who should I pay attention to?"
-- **Feed-Forward**: "Now let me think deeply about what I learned"
+**Lesson 4:** Self-Attention (Done!)
+**Lesson 5:** Multi-Head Attention (Done!)
+**Lesson 6:** Feed-Forward Networks (This lesson)
 
-## Simple Analogy
+All these parts work together inside the Transformer!
 
-Imagine you're studying for an exam:
+## Quick Recap: What We Learned So Far
 
-**Step 1 (Attention):**
-> You gather relevant information from different sources
+Remember from previous lessons:
 
-**Step 2 (Feed-Forward):**
-> You sit down and **process** that information in your brain
-> You connect concepts, understand patterns, memorize
+**Lesson 4 - Self-Attention:**
+- Each word looks at other words in the sentence
 
-Feed-Forward Networks are that "thinking" step!
+**Lesson 5 - Multi-Head Attention:**
+- 8 different ways of looking at words (8 heads)
 
-## Where Does It Fit?
+**Visual Summary:**
 
 \`\`\`mermaid
 flowchart TD
-    Input["Token Embedding"]
-    
-    subgraph Transformer["Transformer Block"]
-        Attn["Multi-Head Attention<br/>👥 What to focus on?"]
-        Add1["Add & Normalize"]
-        FFN["Feed-Forward Network<br/>🧠 Process the information"]
-        Add2["Add & Normalize"]
-    end
-    
-    Output["Enhanced Representation"]
-    
-    Input --> Attn
-    Attn --> Add1
-    Add1 --> FFN
-    FFN --> Add2
-    Add2 --> Output
-    
+    Sentence["Sentence: 'The cat sat on the mat'"]
+
+    L4["Lesson 4: Self-Attention<br/>Each word looks at others"]
+    L4Ex["Example: 'cat' looks at all words"]
+
+    L5["Lesson 5: Multi-Head Attention<br/>8 different ways to look"]
+    L5Ex["8 heads notice different patterns"]
+
+    Result["Result: 'cat' now knows it's related to<br/>'The', 'sat', 'on', 'the', 'mat'"]
+
+    Question["But now what?<br/>We have information... now we need to THINK!"]
+
+    Sentence --> L4
+    L4 --> L4Ex
+    L4Ex --> L5
+    L5 --> L5Ex
+    L5Ex --> Result
+    Result --> Question
+
+    style Sentence fill:#3b82f6,color:#fff
+    style L4 fill:#8b5cf6,color:#fff
+    style L5 fill:#8b5cf6,color:#fff
+    style Result fill:#22c55e,color:#fff
+    style Question fill:#f59e0b,color:#fff
+\`\`\`
+
+**After multi-head attention:** The word "cat" gathered information from other words
+
+**Next step needed:** Process this information (that's what this lesson is about!)
+
+## What is Feed-Forward Network?
+
+**Feed-Forward Network (FFN)** = The "thinking" step that happens **after** attention
+
+Think of it like this:
+
+\`\`\`
+Multi-Head Attention  →  "I gathered information from other words"
+Feed-Forward Network  →  "Now let me THINK about what I learned"
+\`\`\`
+
+## Super Simple Analogy
+
+Imagine you're in class:
+
+**Step 1 - Multi-Head Attention (Previous lesson):**
+- You listen to the teacher
+- You read the textbook
+- You look at the board
+- You gather information from everywhere
+
+**Step 2 - Feed-Forward Network (This lesson):**
+- You sit quietly
+- You **think** about what you just learned
+- Your brain processes the information
+- You understand it better!
+
+Feed-Forward Network = Your brain's "thinking time"!
+
+## How Everything Connects
+
+Here's how all the pieces work together:
+
+\`\`\`mermaid
+flowchart TD
+    Input["Word: 'cat'"]
+
+    Step1["Step 1: Multi-Head Attention<br/>Look at other words"]
+    Step2["Step 2: Feed-Forward Network<br/>Think about what you learned"]
+
+    Output["Smarter understanding of 'cat'"]
+
+    Input --> Step1
+    Step1 --> Step2
+    Step2 --> Output
+
     style Input fill:#3b82f6,color:#fff
-    style FFN fill:#f59e0b,color:#fff
+    style Step1 fill:#8b5cf6,color:#fff
+    style Step2 fill:#f59e0b,color:#fff
     style Output fill:#22c55e,color:#fff
 \`\`\`
 
-## How Does It Work?
+Every word goes through these 2 steps!
 
-FFN is actually **two linear transformations** with an activation function in between.
+## How Does It Work? (Very Simple!)
 
-### The Structure
+Feed-Forward Network does 3 simple steps:
+
+### Step 1: Expand (Make Bigger)
+
+Take the word information and make it **bigger** (more space to think)
 
 \`\`\`
-Input (d_model = 512)
-    ↓
-Linear Layer 1 (512 → 2048)  [Expand!]
-    ↓
-Activation (ReLU or GELU)
-    ↓
-Linear Layer 2 (2048 → 512)  [Compress back!]
-    ↓
-Output (d_model = 512)
+Small box → BIG BOX
+  [512]  →  [2048]
 \`\`\`
 
-It's like **expanding, processing, then compressing** back!
+### Step 2: Think (Activation)
 
-## Why Expand Then Compress?
+Now that we have more space, we **think** and keep only important things
 
-### The Bottleneck Analogy
-
-Imagine you're explaining something:
-
-1. **Expand**: You first explain in great detail with many examples (2048 dimensions)
-2. **Activation**: You emphasize the important parts (non-linearity)
-3. **Compress**: You summarize back to key points (512 dimensions)
-
-The expansion gives the network **room to think**!
-
-## The Mathematics
-
-\`\`\`python
-FFN(x) = Linear2(Activation(Linear1(x)))
-
-# More explicitly:
-def FFN(x):
-    # x shape: [batch, seq_len, 512]
-    
-    # Expand
-    expanded = Linear1(x)  # [batch, seq_len, 2048]
-    
-    # Non-linear activation
-    activated = ReLU(expanded)  # [batch, seq_len, 2048]
-    
-    # Compress back
-    output = Linear2(activated)  # [batch, seq_len, 512]
-    
-    return output
+\`\`\`
+Remove negative thoughts, keep positive ones
 \`\`\`
 
-## Visual Flow
+### Step 3: Compress (Make Small Again)
+
+Compress back to original size with **better understanding**
+
+\`\`\`
+BIG BOX → Small box (but smarter!)
+ [2048] →   [512]
+\`\`\`
+
+## Real-Life Example
+
+Imagine explaining something to a friend:
+
+**Step 1 - Expand:**
+- You explain in DETAIL with many examples
+- "A cat is a small furry animal with four legs, whiskers, says meow, chases mice, sleeps a lot..."
+
+**Step 2 - Think:**
+- Your friend thinks about it
+- Keeps important parts, forgets unnecessary details
+
+**Step 3 - Compress:**
+- Your friend summarizes: "Oh, a cat is a small pet animal!"
+
+That's exactly what Feed-Forward Network does!
+
+## Simple Code Example
+
+\`\`\`python|javascript
+# Feed-Forward Network
+def feed_forward(word):
+    # Step 1: Expand (make bigger)
+    big = expand(word)  # 512 → 2048
+
+    # Step 2: Think (keep important parts)
+    thinking = relu(big)  # Remove negative values
+
+    # Step 3: Compress (make small again)
+    output = compress(thinking)  # 2048 → 512
+
+    return output  # Smarter word!
+|||
+// Feed-Forward Network
+function feedForward(word) {
+    // Step 1: Expand (make bigger)
+    const big = expand(word);  // 512 → 2048
+
+    // Step 2: Think (keep important parts)
+    const thinking = relu(big);  // Remove negative values
+
+    // Step 3: Compress (make small again)
+    const output = compress(thinking);  // 2048 → 512
+
+    return output;  // Smarter word!
+}
+\`\`\`
+
+That's it! Just 3 simple steps.
+
+## Visual Diagram
 
 \`\`\`mermaid
 flowchart LR
-    X["x<br/>[512]"]
-    W1["Linear 1<br/>512 → 2048"]
-    Act["ReLU/GELU"]
-    W2["Linear 2<br/>2048 → 512"]
-    Out["output<br/>[512]"]
-    
+    X["Word<br/>Small"]
+    W1["Expand<br/>Make BIG"]
+    Act["Think<br/>Process"]
+    W2["Compress<br/>Make Small"]
+    Out["Smarter Word"]
+
     X --> W1
     W1 --> Act
     Act --> W2
     W2 --> Out
-    
+
     style X fill:#3b82f6,color:#fff
     style Act fill:#f59e0b,color:#fff
     style Out fill:#22c55e,color:#fff
 \`\`\`
 
-## Why Non-Linearity (ReLU/GELU)?
+## What is "ReLU" (The Thinking Part)?
 
-Without activation, FFN would just be one big linear transformation!
+**ReLU** = A simple rule for thinking
 
-**Without Activation:**
+**Rule:** Keep positive numbers, turn negative numbers into zero
+
+### What Are Positive and Negative Numbers?
+
+If you're learning coding for the first time, here's a quick reminder:
+
+**Positive Numbers:** Numbers greater than zero
 \`\`\`
-Linear1(Linear2(x)) = Combined_Linear(x)
-// Just multiplying matrices, could be done in one step!
-\`\`\`
-
-**With Activation:**
-\`\`\`
-Linear2(ReLU(Linear1(x)))
-// Now we can learn complex, non-linear patterns!
-\`\`\`
-
-### ReLU vs GELU
-
-**ReLU (Rectified Linear Unit):**
-\`\`\`
-ReLU(x) = max(0, x)
-
-Examples:
-ReLU(-2) = 0
-ReLU(0)  = 0
-ReLU(3)  = 3
+1, 2, 3, 5, 10, 100 → All positive!
 \`\`\`
 
-**GELU (Gaussian Error Linear Unit):**
-> Smoother version of ReLU, better for transformers
-> Used in BERT, GPT-2, GPT-3
-
+**Negative Numbers:** Numbers less than zero (have a minus sign)
 \`\`\`
-GELU(x) ≈ x * sigmoid(1.702 * x)
-// Smooth curve instead of hard cutoff
+-1, -2, -5, -10 → All negative!
 \`\`\`
 
-## Position-wise: Key Insight!
+**Zero:** Not positive, not negative
+\`\`\`
+0 → Just zero!
+\`\`\`
 
-**Critical:** FFN is applied to **each position independently**!
+### How ReLU Works
+
+\`\`\`
+Input: -5, -2, 0, 3, 7
+
+After ReLU:
+-5 → 0  (negative, change to 0!)
+-2 → 0  (negative, change to 0!)
+ 0 → 0  (zero, stays zero)
+ 3 → 3  (positive, keep it!)
+ 7 → 7  (positive, keep it!)
+
+Output: 0, 0, 0, 3, 7
+\`\`\`
+
+### Why Remove Negative Numbers?
+
+Think of it like filtering information:
+
+- **Positive numbers** = Important information (keep it!)
+- **Negative numbers** = Not useful right now (ignore it!)
+
+**Example:** If you're studying for a math test:
+- Positive: Math formulas, practice problems (keep these!)
+- Negative: What you ate for breakfast, random thoughts (ignore these!)
+
+ReLU helps the network focus on important information and ignore the rest!
+
+## Each Word Gets Its Own Thinking Time
+
+**Important:** Every word goes through Feed-Forward Network separately!
 
 \`\`\`
 Sentence: "The cat sat"
 
-Position 0 "The" → FFN → processed "The"
-Position 1 "cat" → FFN → processed "cat"  
-Position 2 "sat" → FFN → processed "sat"
-
-Same FFN weights, different inputs!
+Word "The" → Expand → Think → Compress → Smarter "The"
+Word "cat" → Expand → Think → Compress → Smarter "cat"
+Word "sat" → Expand → Think → Compress → Smarter "sat"
 \`\`\`
 
-This is why it's called **Position-wise Feed-Forward**.
+Each word gets its own "thinking time"!
 
+## Putting It All Together
 
-## Why 4x Expansion?
-
-Most transformers use **d_ff = 4 × d_model**
-
-| Model | d_model | d_ff | Ratio |
-|-------|---------|------|-------|
-| BERT Base | 768 | 3072 | 4x |
-| GPT-2 Small | 768 | 3072 | 4x |
-| GPT-3 | 12288 | 49152 | 4x |
-| LLaMA | 4096 | 11008 | ~2.7x |
-
-The 4x ratio is empirically proven to work well!
-
-## What Does FFN Learn?
-
-Research shows FFN layers learn to:
-
-1. **Store Knowledge**: Like a memory bank
-   - "Paris" → activates neurons for "France", "capital", "Eiffel Tower"
-
-2. **Feature Extraction**: Detect patterns
-   - "ing" ending → activates "verb" neurons
-   - Question words → activates "question" neurons
-
-3. **Non-linear Transformations**: Complex mappings
-   - Combining multiple features into new representations
-
-## FFN vs Attention
-
-| Aspect | Attention | Feed-Forward |
-|--------|-----------|--------------|
-| **Purpose** | Find relationships | Process information |
-| **Scope** | Looks at all tokens | Looks at one token |
-| **Parameters** | Fewer | More (most of transformer!) |
-| **Complexity** | O(n²) | O(n) |
-
-**Key Insight:** FFN has **most of the parameters** in a transformer!
-
-\`\`\`
-GPT-2 Small parameters:
-- Attention layers: ~25% of parameters
-- FFN layers: ~50% of parameters
-- Embeddings: ~25% of parameters
-\`\`\`
-
-## Complete Transformer Block
+Here's the complete flow from start to finish:
 
 \`\`\`mermaid
 flowchart TD
-    Input["Input Token<br/>[512]"]
-    
-    subgraph Block["Transformer Block"]
-        MHA["Multi-Head Attention"]
-        Add1["Residual + LayerNorm"]
-        FFN["Feed-Forward Network<br/>512 → 2048 → 512"]
-        Add2["Residual + LayerNorm"]
-    end
-    
-    Output["Output<br/>[512]"]
-    
-    Input --> MHA
-    MHA --> Add1
-    Input -.Residual.-> Add1
-    Add1 --> FFN
-    FFN --> Add2
-    Add1 -.Residual.-> Add2
-    Add2 --> Output
-    
+    Input["Start: 'The cat sat'"]
+
+    Step1["Step 1: Multi-Head Attention<br/>Words look at each other"]
+    Info["'cat' now knows about 'The' and 'sat'"]
+
+    Step2["Step 2: Feed-Forward Network<br/>Each word thinks individually"]
+    Smart["Each word becomes smarter!"]
+
+    Output["Result: Better understanding of sentence"]
+
+    Input --> Step1
+    Step1 --> Info
+    Info --> Step2
+    Step2 --> Smart
+    Smart --> Output
+
     style Input fill:#3b82f6,color:#fff
-    style FFN fill:#f59e0b,color:#fff
+    style Step1 fill:#8b5cf6,color:#fff
+    style Step2 fill:#f59e0b,color:#fff
     style Output fill:#22c55e,color:#fff
 \`\`\`
 
+## Connection to Previous Topics
 
+Let's see how everything connects:
 
-Modern transformers prefer **GELU** or **SwiGLU** (GPT-4, LLaMA).
+| Topic | What It Does | Example |
+|-------|-------------|---------|
+| **Self-Attention** (Lesson 4) | One word looks at others | "cat" looks at "The" and "sat" |
+| **Multi-Head Attention** (Lesson 5) | 8 different ways of looking | 8 heads notice different patterns |
+| **Feed-Forward Network** (This lesson) | Each word thinks about what it learned | "cat" processes all the information |
 
-## Key Takeaways
+**Together:** Attention gathers information → Feed-Forward processes it!
 
-> **Feed-Forward Networks** are the "thinking" layers that process each token individually after attention gathers context.
+## Summary
+
+> **Feed-Forward Network** = The "thinking" step after attention, where each word processes information individually
 
 **Remember:**
-- **Expand → Activate → Compress** (512 → 2048 → 512)
-- **Position-wise**: Same weights, applied to each token independently
-- **Most parameters**: FFN has more parameters than attention
-- **Non-linear**: Activation function enables complex pattern learning
-- **4x expansion**: Standard ratio for hidden dimension
+1. After attention, words need to THINK
+2. Feed-Forward does: Expand → Think → Compress
+3. Every word gets its own thinking time
+4. Makes words "smarter" with better understanding
+
+**Think of it as:** After listening to everyone (attention), you sit quietly and think about what you learned (feed-forward)!
 
 ## What's Next?
 

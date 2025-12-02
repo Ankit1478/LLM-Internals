@@ -10,6 +10,18 @@ export const selfAttention: Article = {
   nextTopic: { module: 2, slug: 'multi-head-attention', title: '5. Multi-Head Attention' },
   content: `# Self-Attention Mechanism
 
+## Part of Transformer Architecture
+
+**Remember from Lesson 3:** Transformers are the brain behind ChatGPT, Claude, and all modern AI.
+
+Now we're learning the **building blocks** inside the Transformer:
+
+- **Lesson 4 (This lesson):** Self-Attention
+- **Lesson 5 (Next):** Multi-Head Attention
+- **Lesson 6 (After that):** Feed-Forward Networks
+
+These 3 parts work together inside the Transformer!
+
 ## What is Self-Attention?
 
 Self-Attention = AI asking **"Which words should I focus on?"**

@@ -10,6 +10,16 @@ export const multiHeadAttention: Article = {
   nextTopic: { module: 2, slug: 'feed-forward-networks', title: '6. Feed-Forward Networks' },
   content: `# Multi-Head Attention
 
+## Part of Transformer Architecture
+
+We're building the Transformer piece by piece:
+
+**Lesson 4:** Self-Attention (Done!)
+**Lesson 5:** Multi-Head Attention (This lesson)
+**Lesson 6:** Feed-Forward Networks (Next)
+
+These components work together inside every Transformer model!
+
 ## Quick Recap: Self-Attention
 
 Remember **Self-Attention** from the previous lesson?

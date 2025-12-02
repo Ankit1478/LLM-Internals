@@ -22,6 +22,11 @@ function MermaidDiagram({ chart }: { chart: string }) {
     mermaid.initialize({
       startOnLoad: false,
       theme: isDark ? 'dark' : 'base',
+      flowchart: {
+        padding: 8,
+        nodeSpacing: 40,
+        rankSpacing: 40,
+      },
       themeVariables: isDark ? {
         primaryColor: '#3b82f6',
         primaryTextColor: '#fff',
@@ -30,6 +35,7 @@ function MermaidDiagram({ chart }: { chart: string }) {
         secondaryColor: '#1e293b',
         tertiaryColor: '#0f172a',
         nodeTextColor: '#fff',
+        fontSize: '12px',
       } : {
         primaryColor: '#dbeafe',
         primaryTextColor: '#1e293b',
@@ -42,6 +48,7 @@ function MermaidDiagram({ chart }: { chart: string }) {
         nodeBorder: '#3b82f6',
         nodeTextColor: '#1e293b',
         fontFamily: 'inherit',
+        fontSize: '12px',
       },
     });
 
@@ -61,7 +68,10 @@ function MermaidDiagram({ chart }: { chart: string }) {
     <div
       ref={containerRef}
       className="my-6 p-4 rounded-lg overflow-x-auto flex justify-center"
-      style={{ background: 'var(--muted)' }}
+      style={{
+        background: 'var(--muted)',
+        fontSize: '0.875rem',
+      }}
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );
@@ -119,14 +129,58 @@ export default function TopicPage() {
     let codeLanguage = '';
     let inTable = false;
     let tableRows: React.ReactNode[] = [];
+    let inOrderedList = false;
+    let orderedListItems: React.ReactNode[] = [];
     const { theme } = useTheme();
+
+    const finishOrderedList = (currentIndex: number) => {
+      if (inOrderedList && orderedListItems.length > 0) {
+        elements.push(
+          <ol key={`ol-${currentIndex}`} className="ml-6 mb-4 list-decimal">
+            {orderedListItems}
+          </ol>
+        );
+        orderedListItems = [];
+        inOrderedList = false;
+      }
+    };
 
     const finishTable = (currentIndex: number) => {
       if (inTable && tableRows.length > 0) {
+        // Group tbody rows together
+        const tableContent: React.ReactNode[] = [];
+        const tbodyRows: React.ReactNode[] = [];
+
+        tableRows.forEach((row) => {
+          if (row && typeof row === 'object' && 'type' in row && row.type === 'thead') {
+            // If we have tbody rows, wrap them first
+            if (tbodyRows.length > 0) {
+              tableContent.push(
+                <tbody key={`tbody-${currentIndex}-${tableContent.length}`}>
+                  {[...tbodyRows]}
+                </tbody>
+              );
+              tbodyRows.length = 0;
+            }
+            tableContent.push(row);
+          } else {
+            tbodyRows.push(row);
+          }
+        });
+
+        // Add remaining tbody rows
+        if (tbodyRows.length > 0) {
+          tableContent.push(
+            <tbody key={`tbody-${currentIndex}-final`}>
+              {tbodyRows}
+            </tbody>
+          );
+        }
+
         elements.push(
           <div key={`table-${currentIndex}`} className="overflow-x-auto my-4">
             <table className="w-full border-collapse" style={{ borderColor: 'var(--border)' }}>
-              {tableRows}
+              {tableContent}
             </table>
           </div>
         );
@@ -289,12 +343,18 @@ export default function TopicPage() {
       // Numbered list
       if (/^\d+\.\s/.test(line)) {
         const content = line.replace(/^\d+\.\s/, '');
-        elements.push(
-          <li key={index} className="ml-6 mb-2 list-decimal" style={{ color: 'var(--foreground)' }}>
+        inOrderedList = true;
+        orderedListItems.push(
+          <li key={index} className="mb-2" style={{ color: 'var(--foreground)' }}>
             {renderInlineMarkdown(content)}
           </li>
         );
         return;
+      }
+
+      // If we were in an ordered list and hit a non-list line, finish the list
+      if (inOrderedList) {
+        finishOrderedList(index);
       }
 
       // Table handling
@@ -313,23 +373,19 @@ export default function TopicPage() {
               <tr style={{ background: 'var(--muted)' }}>
                 {cells.map((cell, i) => (
                   <th key={i} className="border px-4 py-2 text-left font-semibold" style={{ borderColor: 'var(--border)', color: 'var(--foreground)' }}>
-                    {cell.trim()}
+                    {renderInlineMarkdown(cell.trim())}
                   </th>
                 ))}
               </tr>
             </thead>
           );
         } else {
-          // Start tbody if needed
-          if (tableRows.length > 0 && tableRows[tableRows.length - 1]?.type === 'thead') {
-            tableRows.push(<tbody key={`tbody-${index}`}></tbody>);
-          }
-
+          // Just push the row, we'll wrap in tbody later
           tableRows.push(
             <tr key={`row-${index}`}>
               {cells.map((cell, i) => (
                 <td key={i} className="border px-4 py-2" style={{ borderColor: 'var(--border)', color: 'var(--foreground)' }}>
-                  {cell.trim()}
+                  {renderInlineMarkdown(cell.trim())}
                 </td>
               ))}
             </tr>
@@ -351,8 +407,9 @@ export default function TopicPage() {
       );
     });
 
-    // Finish any remaining table
+    // Finish any remaining table or list
     finishTable(lines.length);
+    finishOrderedList(lines.length);
 
     return elements;
   };
