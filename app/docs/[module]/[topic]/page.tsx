@@ -7,6 +7,8 @@ import { useState, useEffect, useRef } from 'react';
 import { getArticle } from '@/lib/content/index';
 import { useTheme } from '@/components/theme-provider';
 import mermaid from 'mermaid';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // Mermaid component
 function MermaidDiagram({ chart }: { chart: string }) {
@@ -114,6 +116,7 @@ export default function TopicPage() {
     let inCodeBlock = false;
     let codeContent = '';
     let codeLanguage = '';
+    const { theme } = useTheme();
 
     lines.forEach((line, index) => {
       // Code block handling
@@ -130,9 +133,19 @@ export default function TopicPage() {
             );
           } else {
             elements.push(
-              <pre key={`code-${index}`} className="rounded-lg overflow-x-auto mb-4 text-sm" style={{ background: 'var(--muted)', padding: '1rem' }}>
-                <code style={{ color: 'var(--foreground)' }}>{codeContent}</code>
-              </pre>
+              <div key={`code-${index}`} className="my-4">
+                <SyntaxHighlighter
+                  language={codeLanguage || 'text'}
+                  style={theme === 'dark' ? oneDark : oneLight}
+                  customStyle={{
+                    borderRadius: '0.5rem',
+                    padding: '1rem',
+                    fontSize: '0.875rem',
+                  }}
+                >
+                  {codeContent}
+                </SyntaxHighlighter>
+              </div>
             );
           }
           inCodeBlock = false;
