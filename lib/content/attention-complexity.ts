@@ -10,369 +10,251 @@ export const attentionComplexity: Article = {
   nextTopic: { module: 2, slug: 'causal-masking', title: '10. Causal Masking' },
   content: `# Attention Mechanics & Complexity
 
-## What is Computational Complexity?
+## Part of Transformer Architecture
 
-Computational complexity tells us **how much work** a process takes as the input grows larger.
+We're continuing to build the Transformer:
 
-Think of it like:
-- Organizing 10 books on a shelf? Easy, takes 1 minute
-- Organizing 100 books? Takes 10 minutes
-- Organizing 1000 books? Takes...?
+**Lesson 4:** Self-Attention (Done!)
+**Lesson 5:** Multi-Head Attention (Done!)
+**Lesson 6:** Feed-Forward Networks (Done!)
+**Lesson 7:** Layer Normalization (Done!)
+**Lesson 8:** Residual Connections (Done!)
+**Lesson 9:** Attention Complexity (This lesson)
 
-The **complexity** tells us how the time grows!
+## Why Learn This?
+
+Understanding attention complexity helps you:
+- Know why AI API calls cost more for longer inputs
+- Understand context window limits (GPT-4's 8K vs 128K tokens)
+- Optimize your AI integration costs
+- Choose the right model for your use case
+- Understand why some AI requests are slow
+
+**Real impact:** This is why you see "Maximum 4000 tokens" errors when calling AI APIs!
+
+## What is Complexity?
+
+**Complexity** = How much work the computer needs to do
+
+\`\`\`plaintext
+Search 10 items:   Takes 1 second
+Search 100 items:  Takes 10 seconds
+Search 1000 items: Takes 100 seconds
+
+The more items, the more work!
+\`\`\`
 
 ## The Attention Problem
 
-Self-attention needs to compare **every word** with **every other word**.
+Remember: **Self-Attention** means each word looks at every other word
 
-\`\`\`
-Sentence: "The cat sat"
-Comparisons needed:
-- "The" looks at: The, cat, sat (3 comparisons)
-- "cat" looks at: The, cat, sat (3 comparisons)
-- "sat" looks at: The, cat, sat (3 comparisons)
+**Example:** "The cat sat"
+
+\`\`\`plaintext
+"The" looks at: The, cat, sat (3 comparisons)
+"cat" looks at: The, cat, sat (3 comparisons)
+"sat" looks at: The, cat, sat (3 comparisons)
 
 Total: 3 × 3 = 9 comparisons
 \`\`\`
 
-For **n words**: n × n = n² comparisons!
+**Formula:** For n words → n × n comparisons
 
-## O(n²) Complexity
+## Why This is a Problem
 
-This is written as **O(n²)** - "Big-O of n squared"
+The comparisons grow VERY fast:
 
+\`\`\`plaintext
+3 words    → 3 × 3 = 9 comparisons
+10 words   → 10 × 10 = 100 comparisons
+100 words  → 100 × 100 = 10,000 comparisons
+1000 words → 1000 × 1000 = 1,000,000 comparisons!
 \`\`\`
-Sequence Length (n) → Comparisons (n²)
-10 words → 100 comparisons
-100 words → 10,000 comparisons
-1,000 words → 1,000,000 comparisons! 💥
-10,000 words → 100,000,000 comparisons!! 💥💥
+
+**For web developers:** This is like nested loops!
+
+\`\`\`javascript
+// This is what attention does:
+for (let i = 0; i < words.length; i++) {
+    for (let j = 0; j < words.length; j++) {
+        compare(words[i], words[j]); // n × n = n² operations!
+    }
+}
 \`\`\`
 
-Notice how it **explodes** as length increases!
+Nested loops = Slow for large inputs!
 
-## Visual Comparison Matrix
+## Visual Example
 
 \`\`\`mermaid
-graph TD
-    subgraph "Attention Matrix (n × n)"
-        A["Every word (row)"]
-        B["attends to"]
-        C["Every word (column)"]
-    end
-    
-    Matrix["Matrix Size: n × n<br/>Total operations: n²"]
-    
-    A --> B --> C
-    B --> Matrix
-    
+flowchart TD
+    Words["3 words:<br/>'The cat sat'"]
+    Matrix["Comparison Matrix<br/>3 × 3 = 9 comparisons"]
+    Result["Each word knows about<br/>all other words"]
+
+    Words --> Matrix
+    Matrix --> Result
+
     style Matrix fill:#f59e0b,color:#fff
+    style Result fill:#22c55e,color:#fff
 \`\`\`
 
-## Why is it O(n²)?
+## Not Just Computation - Memory Too!
 
-### Three Matrix Operations
+The computer needs to remember all comparisons:
 
-Attention computes three things for every token pair:
-
-**Step 1: Calculate Scores**
-\`\`\`
-Query (n × d) × Key^T (d × n) = Scores (n × n)
-
-For each of n queries:
-  Compare with n keys
-  = n × n = O(n²) operations
+\`\`\`plaintext
+100 words   = Store 10,000 numbers
+1000 words  = Store 1,000,000 numbers (uses a lot of memory!)
+10,000 words = Store 100,000,000 numbers (might run out of memory!)
 \`\`\`
 
-**Step 2: Apply Softmax**
+**For web developers:** Like creating a huge 2D array:
+\`\`\`javascript
+const n = 1000;
+const attentionMatrix = new Array(n).fill(0).map(() => new Array(n));
+// This is 1,000,000 values!
 \`\`\`
-For each row in the n × n matrix:
-  Compute softmax (normalize)
-  = O(n²) operations
-\`\`\`
-
-**Step 3: Weighted Sum**
-\`\`\`
-Scores (n × n) × Values (n × d) = Output (n × d)
-
-For each of n positions:
-  Sum over n weighted values
-  = n × n = O(n²) operations
-\`\`\`
-
-**Total: O(n²) + O(n²) + O(n²) = O(n²)**
-
-## Memory Complexity
-
-Not just computation - **memory** also grows!
-
-\`\`\`
-Attention Matrix Storage:
-- Size: n × n
-- For n = 1000: 1,000,000 values
-- For n = 10,000: 100,000,000 values
-
-Each value is typically 16 bits (half precision)
-= 200 MB for 10,000 tokens! (just for one attention matrix!)
-\`\`\`
-
-## The Bottleneck Visualized
-
-\`\`\`mermaid
-flowchart LR
-    subgraph Input["Input Processing"]
-        E1["Embeddings<br/>O(n)"]
-    end
-    
-    subgraph Attention["Attention Layer"]
-        A1["Q, K, V projection<br/>O(n)"]
-        A2["Attention Matrix<br/>O(n²) ⚠️"]
-        A3["Context computation<br/>O(n²) ⚠️"]
-    end
-    
-    subgraph FFN["Feed-Forward"]
-        F1["FFN computation<br/>O(n)"]
-    end
-    
-    Input --> Attention
-    A1 --> A2 --> A3
-    Attention --> FFN
-    
-    style A2 fill:#ef4444,color:#fff
-    style A3 fill:#ef4444,color:#fff
-\`\`\`
-
-The **attention computation** is the bottleneck!
 
 ## Real-World Impact
 
-### Short Sequences (n = 512)
-
-\`\`\`
-n² = 512² = 262,144 operations
-✅ Fast on modern GPUs
-✅ Fits in memory easily
+**Short Text (512 words):**
+\`\`\`plaintext
+512 × 512 = 262,144 comparisons
+Fast! Works great.
 \`\`\`
 
-### Medium Sequences (n = 2048)
-
-\`\`\`
-n² = 2048² = 4,194,304 operations
-⚠️ Slower, but manageable
-⚠️ More memory needed
+**Medium Text (2,048 words):**
+\`\`\`plaintext
+2,048 × 2,048 = 4,194,304 comparisons
+Slower, but still okay
 \`\`\`
 
-### Long Sequences (n = 100,000)
-
-\`\`\`
-n² = 100,000² = 10,000,000,000 operations
-❌ Extremely slow
-❌ Requires huge amounts of memory
-❌ Often impossible on standard hardware
+**Long Text (10,000 words):**
+\`\`\`plaintext
+10,000 × 10,000 = 100,000,000 comparisons
+Very slow! Might not work!
 \`\`\`
 
-## Comparison with Other Operations
+## Why AI Models Have Limits
 
-| Operation | Complexity | Example (n=1000) |
-|-----------|-----------|------------------|
-| **Feed-Forward** | O(n) | 1,000 ops |
-| **Layer Norm** | O(n) | 1,000 ops |
-| **Embedding Lookup** | O(n) | 1,000 ops |
-| **Attention** | O(n²) | 1,000,000 ops ⚠️ |
+This is why AI models have **token limits**:
 
-Attention is **1000x more expensive** for n=1000!
+| Model | Token Limit | Why? |
+|-------|------------|------|
+| GPT-3.5 | 4,096 tokens | Attention is too expensive beyond this |
+| GPT-4 | 8,192 tokens | Better hardware, but still limited |
+| Claude | 100,000 tokens | Special optimizations needed |
 
-## The Quadratic Wall
+**For web developers:** This is why you see "Maximum 4000 tokens" errors when calling AI APIs!
 
-\`\`\`mermaid
-graph LR
-    subgraph Growth["Complexity Growth"]
-        L["Linear O(n)<br/>Grows slowly"]
-        Q["Quadratic O(n²)<br/>Grows rapidly"]
-    end
-    
-    Examples["Examples:<br/>n=1000: 1000 vs 1,000,000<br/>n=10000: 10,000 vs 100,000,000"]
-    
-    L -.Manageable.-> Examples
-    Q -.Limiting Factor!.-> Examples
-    
-    style Q fill:#ef4444,color:#fff
-    style L fill:#22c55e,color:#fff
+## Simple Code Example
+
+\`\`\`python|javascript
+# This is why attention is slow
+def attention_complexity(words):
+    n = len(words)
+
+    # Every word looks at every word (nested loop!)
+    for word1 in words:      # Loop 1: n times
+        for word2 in words:  # Loop 2: n times
+            compare(word1, word2)
+
+    # Total: n × n = n² comparisons
+
+# Example
+words = ["The", "cat", "sat"]  # 3 words
+# Comparisons: 3 × 3 = 9
+|||
+// This is why attention is slow
+function attentionComplexity(words) {
+    const n = words.length;
+
+    // Every word looks at every word (nested loop!)
+    for (let i = 0; i < n; i++) {      // Loop 1: n times
+        for (let j = 0; j < n; j++) {  // Loop 2: n times
+            compare(words[i], words[j]);
+        }
+    }
+
+    // Total: n × n = n² comparisons
+}
+
+// Example
+const words = ["The", "cat", "sat"];  // 3 words
+// Comparisons: 3 × 3 = 9
 \`\`\`
 
-## Breaking Down the Attention Formula
+## How This Relates to Web Development
 
-\`\`\`
-Attention(Q, K, V) = Softmax(QK^T / √d) V
+**API Cost Example:**
 
-Let's count operations for each part:
-\`\`\`
+\`\`\`javascript
+// Calling OpenAI API
+async function callAI(prompt) {
+    const response = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user", content: prompt }]
+    });
 
-### Part 1: QK^T (Query-Key Dot Product)
+    // Cost depends on token count
+    // Long prompts = more tokens = more attention work = higher cost!
+}
 
-\`\`\`
-Q: [n × d]  (n queries, d dimensions each)
-K^T: [d × n]  (n keys transposed)
+// This costs less (50 tokens × 50 = 2,500 comparisons)
+const short = "Write a haiku";
 
-QK^T: [n × n]
-
-For each of n queries:
-  Compute dot product with n keys
-  Each dot product: d multiplications
-  Total: n × n × d operations
-  
-Complexity: O(n² × d)
-\`\`\`
-
-### Part 2: Divide by √d (Scaling)
-
-\`\`\`
-For each element in [n × n] matrix:
-  Divide by √d
-  
-Total: n² operations
-Complexity: O(n²)
+// This costs more! (1000 tokens × 1000 = 1,000,000 comparisons)
+const long = "Write a detailed essay..." + 5000 words;
 \`\`\`
 
-### Part 3: Softmax
+**Why context windows matter:**
+\`\`\`javascript
+// GPT-3.5 limit: 4,096 tokens
+const prompt = userInput + chatHistory;
 
+if (countTokens(prompt) > 4096) {
+    // Error! Too long for attention to handle
+    throw new Error("Prompt exceeds token limit");
+}
 \`\`\`
-For each row (n rows total):
-  Exponentiate n values: O(n)
-  Sum n values: O(n)
-  Divide each by sum: O(n)
-  
-Total: n × 3n = 3n²
-Complexity: O(n²)
-\`\`\`
-
-### Part 4: Multiply by V (Apply Attention)
-
-\`\`\`
-Attention Weights: [n × n]
-V: [n × d]
-
-Result: [n × d]
-
-For each of n output positions:
-  Compute weighted sum of n values
-  Each value has d dimensions
-  Total: n × n × d
-  
-Complexity: O(n² × d)
-\`\`\`
-
-**Dominant Terms: O(n² × d)**
-
-## Multi-Head Attention Complexity
-
-With **h heads**:
-
-\`\`\`
-Each head: O(n² × d_head)
-where d_head = d_model / h
-
-Total for h heads:
-h × O(n² × d/h) = O(n² × d)
-
-Multi-head doesn't change overall complexity!
-But processes happen in parallel on GPU ✅
-\`\`\`
-
-## Why Not Just Make Attention Linear?
-
-You might ask: "Why not use a simpler, O(n) operation?"
-
-**The Problem:**
-- Attention's power comes from comparing **all pairs**
-- This is what enables "understanding" relationships
-- Removing this = losing the core benefit
-
-**Trade-off:**
-- Power vs Efficiency
-- Understanding vs Speed
-
-That's why researchers work on:
-- **Efficient attention** (approximations)
-- **Sparse attention** (selective comparisons)
-- **Linear attention** (new architectures)
-
-We'll cover these later!
-
-## Context Window Limitations
-
-The O(n²) complexity directly limits **context windows**:
-
-| Model | Context Window | Attention Ops |
-|-------|---------------|---------------|
-| **GPT-2** | 1,024 | ~1 million |
-| **GPT-3** | 2,048 | ~4 million |
-| **GPT-4** | 8,192 | ~67 million |
-| **Claude 2** | 100,000 | ~10 billion ⚠️ |
-
-Longer context = exponentially more computation!
-
-## The Cost Breakdown
-
-For a transformer with **L layers**, **h heads**, and **n tokens**:
-
-\`\`\`
-Per Layer:
-- Multi-head attention: O(n² × d)
-- Feed-forward: O(n × d × d_ff)
-
-Total Model:
-- Attention: L × O(n² × d)
-- FFN: L × O(n × d × d_ff)
-
-For n = 2048, d = 768:
-- Attention: ~3 billion ops per layer
-- FFN: ~6 billion ops per layer
-
-Attention is significant but not always dominant!
-\`\`\`
-
-## Practical Implications
-
-**Training:**
-- Batch size × sequence length × sequence length
-- Limited by GPU memory
-- Often use gradient checkpointing to save memory
-
-**Inference:**
-- Process one token at a time with KV cache
-- Much more efficient (we'll cover this later!)
-- Still limited by context length
-
-## Optimization Techniques (Preview)
-
-We'll explore these in upcoming topics:
-
-1. **KV Cache**: Reuse previous computations
-2. **Flash Attention**: Optimized GPU kernels
-3. **Sparse Attention**: Only attend to subset
-4. **Linear Attention**: Approximate with O(n)
-5. **PagedAttention**: Better memory management
 
 ## Summary
 
-> **Attention Complexity** = O(n²) - every token must compare with every other token, making long sequences computationally expensive.
+> **Attention Complexity** = Each word compares with every other word, causing n × n comparisons
 
-**Key Insights:**
-- 📊 Quadratic growth: 2x length = 4x computation
-- 💾 Memory and compute both scale with n²
-- 🎯 This is the main bottleneck for long contexts
-- ⚡ Many optimizations exist to address this
+**Remember:**
+1. Attention uses nested loops (n × n)
+2. 10 words = 100 comparisons
+3. 1000 words = 1,000,000 comparisons (slow!)
+4. This is why AI models have token limits
+5. Longer input = Higher API costs
 
-**The Formula:**
+**For web developers:**
+- Like for loop inside another for loop
+- This is why context windows have limits
+- This is why longer prompts cost more
+- Understanding this helps you optimize AI integration
+
+**Simple formula:**
+\`\`\`plaintext
+n words → n × n comparisons
+
+Double the words = 4× the work!
 \`\`\`
-For n tokens:
-Comparisons = n²
-Memory = n² × bytes_per_value
-Time = O(n²× d)
 
-Where d is the model dimension
-\`\`\`
+## Connection to Previous Topics
+
+| Topic | What It Does | Complexity |
+|-------|-------------|------------|
+| **Self-Attention** (Lesson 4) | Words look at each other | n × n |
+| **Multi-Head Attention** (Lesson 5) | 8 different ways of looking | Still n × n |
+| **Feed-Forward Network** (Lesson 6) | Each word thinks individually | Just n (fast!) |
+| **Layer Normalization** (Lesson 7) | Keep numbers balanced | Just n (fast!) |
+| **Residual Connections** (Lesson 8) | Preserve original information | Just n (fast!) |
+| **Attention Complexity** (This lesson) | Why attention is the bottleneck | n × n (slow!) |
+
+Attention is the slowest part of the Transformer!
 
 ## What's Next?
 
