@@ -9,6 +9,7 @@ import { useTheme } from '@/components/theme-provider';
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   const [expandedSections, setExpandedSections] = useState<number[]>([0]);
+  const [expandedSubModules, setExpandedSubModules] = useState<string[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
@@ -16,6 +17,12 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
   const toggleSection = (module: number) => {
     setExpandedSections(prev =>
       prev.includes(module) ? prev.filter(s => s !== module) : [...prev, module]
+    );
+  };
+
+  const toggleSubModule = (key: string) => {
+    setExpandedSubModules(prev =>
+      prev.includes(key) ? prev.filter(s => s !== key) : [...prev, key]
     );
   };
 
@@ -105,7 +112,8 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
 
                 {expandedSections.includes(section.module) && (
                   <div className="ml-4 mt-1 space-y-1 border-l-2 pl-4" style={{ borderColor: 'var(--border)' }}>
-                    {section.topics.map((topic, idx) => {
+                    {/* Render regular topics */}
+                    {section.topics?.map((topic, idx) => {
                       const isActive = isActiveTopic(section.module, topic.slug);
                       return (
                         <Link
@@ -127,6 +135,59 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
                         >
                           {topic.title}
                         </Link>
+                      );
+                    })}
+
+                    {/* Render subModules (nested) */}
+                    {section.subModules?.map((subModule, subIdx) => {
+                      const subKey = `${section.module}-${subIdx}`;
+                      const isSubExpanded = expandedSubModules.includes(subKey);
+                      return (
+                        <div key={subIdx} className="mt-1">
+                          <button
+                            onClick={() => toggleSubModule(subKey)}
+                            className="w-full flex items-center gap-2 py-1.5 px-2 rounded text-left transition-colors text-sm"
+                            style={{ color: 'var(--foreground)' }}
+                            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--sidebar-hover)'}
+                            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                          >
+                            {isSubExpanded ? (
+                              <ChevronDown className="w-3 h-3 flex-shrink-0" style={{ color: 'var(--muted-foreground)' }} />
+                            ) : (
+                              <ChevronRight className="w-3 h-3 flex-shrink-0" style={{ color: 'var(--muted-foreground)' }} />
+                            )}
+                            <span className="font-medium">{subModule.title}</span>
+                          </button>
+
+                          {isSubExpanded && (
+                            <div className="ml-4 mt-1 space-y-1 border-l-2 pl-3" style={{ borderColor: 'var(--border)' }}>
+                              {subModule.topics.map((topic, topicIdx) => {
+                                const isActive = isActiveTopic(section.module, topic.slug);
+                                return (
+                                  <Link
+                                    key={topicIdx}
+                                    href={`/docs/${section.module}/${topic.slug}`}
+                                    onClick={() => setSidebarOpen(false)}
+                                    className="block py-1 px-2 text-xs rounded transition-colors"
+                                    style={{
+                                      background: isActive ? 'var(--accent)' : 'transparent',
+                                      color: isActive ? 'var(--foreground)' : 'var(--muted-foreground)',
+                                      fontWeight: isActive ? 600 : 400,
+                                    }}
+                                    onMouseEnter={(e) => {
+                                      if (!isActive) e.currentTarget.style.background = 'var(--sidebar-hover)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                      if (!isActive) e.currentTarget.style.background = 'transparent';
+                                    }}
+                                  >
+                                    {topic.title}
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          )}
+                        </div>
                       );
                     })}
                   </div>

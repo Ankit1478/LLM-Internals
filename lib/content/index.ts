@@ -1,6 +1,6 @@
 // Content index - imports all articles and exports them
 
-import { Article, Module } from './types';
+import { Article, Module, SubModule, Topic } from './types';
 import { introduction } from './introduction';
 import { quickStart } from './quick-start';
 import { fullstackBasics } from './fullstack-basics';
@@ -31,9 +31,26 @@ import { instructionCompletion } from './instruction-completion';
 import { basicConcepts } from './basic-concepts';
 import { advancedTopics } from './advanced-topics';
 import { codeExamples } from './code-examples';
+import { whatIsAiAgent } from './what-is-ai-agent';
+import { agentVsPromptVsWorkflow } from './agent-vs-prompt-vs-workflow';
+import { agentLifecycle } from './agent-lifecycle';
+import { agentEnvironmentState } from './agent-environment-state';
+import { deterministicVsProbabilistic } from './deterministic-vs-probabilistic';
+import { statelessVsStateful } from './stateless-vs-stateful';
+import { reactPattern } from './react-pattern';
+import { thoughtActionObservation } from './thought-action-observation';
+import { toolFirstExecution } from './tool-first-execution';
+import { planningVsExecution } from './planning-vs-execution';
+import { plannerWorkerArchitecture } from './planner-worker-architecture';
+import { reactiveVsDeliberative } from './reactive-vs-deliberative';
+import { agentStateMachines } from './agent-state-machines';
+import { explicitVsImplicitState } from './explicit-vs-implicit-state';
+import { transitionGuards } from './transition-guards';
+import { errorStatesRecovery } from './error-states-recovery';
+import { loopDetectionTermination } from './loop-detection-termination';
 
 // Re-export types
-export type { Article, Module };
+export type { Article, Module, SubModule, Topic };
 
 // All articles mapped by slug
 const articles: Record<string, Article> = {
@@ -67,6 +84,23 @@ const articles: Record<string, Article> = {
   'basic-concepts': basicConcepts,
   'advanced-topics': advancedTopics,
   'code-examples': codeExamples,
+  'what-is-ai-agent': whatIsAiAgent,
+  'agent-vs-prompt-vs-workflow': agentVsPromptVsWorkflow,
+  'agent-lifecycle': agentLifecycle,
+  'agent-environment-state': agentEnvironmentState,
+  'deterministic-vs-probabilistic': deterministicVsProbabilistic,
+  'stateless-vs-stateful': statelessVsStateful,
+  'react-pattern': reactPattern,
+  'thought-action-observation': thoughtActionObservation,
+  'tool-first-execution': toolFirstExecution,
+  'planning-vs-execution': planningVsExecution,
+  'planner-worker-architecture': plannerWorkerArchitecture,
+  'reactive-vs-deliberative': reactiveVsDeliberative,
+  'agent-state-machines': agentStateMachines,
+  'explicit-vs-implicit-state': explicitVsImplicitState,
+  'transition-guards': transitionGuards,
+  'error-states-recovery': errorStatesRecovery,
+  'loop-detection-termination': loopDetectionTermination,
 };
 
 // Docs Roadmap - Modules and Topics
@@ -126,6 +160,68 @@ export const docsRoadmap: Module[] = [
       { title: '21. Why Hallucinations Happen', slug: 'hallucinations' },
       { title: '22. Prompt Context Dynamics', slug: 'prompt-context' },
       { title: '23. Instruction Following vs Completion', slug: 'instruction-completion' },
+    ]
+  },
+  {
+    module: 3,
+    title: 'Agents',
+    subModules: [
+      {
+        title: 'Core Agent Patterns',
+        topics: [
+          { title: 'ReAct: Reason → Act Loop', slug: 'react-pattern' },
+          { title: 'Thought-Action-Observation Loop', slug: 'thought-action-observation' },
+          { title: 'Tool-First Execution', slug: 'tool-first-execution' },
+          { title: 'Planner + Worker Architecture', slug: 'planner-worker-architecture' },
+          { title: 'Memory in Agents', slug: 'memory-in-agents' },
+          { title: 'State Machines for Agents', slug: 'agent-state-machines' },
+        ]
+      },
+      {
+        title: 'Multi-Agent Systems',
+        topics: [
+          { title: 'Agent Roles', slug: 'agent-roles' },
+          { title: 'Supervisor Agent', slug: 'supervisor-agent' },
+          { title: 'Worker Agents', slug: 'worker-agents' },
+          { title: 'Planning Agent', slug: 'planning-agent' },
+          { title: 'Memory Agent', slug: 'memory-agent' },
+          { title: 'Evaluation Agent', slug: 'evaluation-agent' },
+          { title: 'Verification Agent', slug: 'verification-agent' },
+          { title: 'Reflection Agent', slug: 'reflection-agent' },
+          { title: 'Multi-Agent Communication', slug: 'multi-agent-communication' },
+          { title: 'Message Passing', slug: 'message-passing' },
+          { title: 'Shared Memory', slug: 'shared-memory' },
+          { title: 'Event Bus', slug: 'event-bus' },
+          { title: 'State Synchronization', slug: 'state-synchronization' },
+          { title: 'Multi-Agent Patterns', slug: 'multi-agent-patterns' },
+          { title: 'Sequential Pipeline', slug: 'sequential-pipeline' },
+          { title: 'Parallel Execution', slug: 'parallel-execution' },
+          { title: 'Hierarchical', slug: 'hierarchical-pattern' },
+          { title: 'Collaborative (Debate & Consensus)', slug: 'collaborative-pattern' },
+        ]
+      },
+      {
+        title: 'Agent Frameworks',
+        topics: [
+          { title: 'LangGraph', slug: 'langgraph' },
+          { title: 'AutoGen (Microsoft)', slug: 'autogen' },
+          { title: 'CrewAI (Role-Based)', slug: 'crewai' },
+          { title: 'Vercel AI SDK (Streaming-First)', slug: 'vercel-ai-sdk' },
+        ]
+      },
+      {
+        title: 'Agent OS Concepts',
+        topics: [
+          { title: 'Durable Execution', slug: 'durable-execution' },
+          { title: 'Event-Driven Agents', slug: 'event-driven-agents' },
+          { title: 'State Checkpointing', slug: 'state-checkpointing' },
+          { title: 'Task Graph Execution (DAG)', slug: 'task-graph-dag' },
+          { title: 'Agent Logs & Traces', slug: 'agent-logs-traces' },
+          { title: 'Multi-Agent Orchestration Engine', slug: 'orchestration-engine' },
+          { title: 'Chain, Router, Parallelizer, Loop Patterns', slug: 'orchestration-patterns' },
+          { title: 'Human-in-the-Loop', slug: 'human-in-the-loop' },
+        ]
+      },
     ]
   },
 ];

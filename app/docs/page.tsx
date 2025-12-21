@@ -78,7 +78,8 @@ export default function DocsHome() {
                       {module.title}
                     </h3>
                     <div className="flex flex-wrap gap-2">
-                      {module.topics.map((topic) => (
+                      {/* Handle modules with topics */}
+                      {module.topics?.map((topic) => (
                         <Link
                           key={topic.slug}
                           href={`/docs/${module.module}/${topic.slug}`}
@@ -95,6 +96,16 @@ export default function DocsHome() {
                         >
                           {topic.title}
                         </Link>
+                      ))}
+                      {/* Handle modules with subModules - show subModule titles */}
+                      {module.subModules?.map((subModule, subIdx) => (
+                        <span
+                          key={subIdx}
+                          className="text-sm px-3 py-1 rounded-full"
+                          style={{ background: 'var(--muted)', color: 'var(--muted-foreground)' }}
+                        >
+                          {subModule.title}
+                        </span>
                       ))}
                     </div>
                   </div>

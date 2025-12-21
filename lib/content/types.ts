@@ -11,8 +11,19 @@ export interface Article {
   nextTopic?: { module: number; slug: string; title: string };
 }
 
+export interface Topic {
+  title: string;
+  slug: string;
+}
+
+export interface SubModule {
+  title: string;
+  topics: Topic[];
+}
+
 export interface Module {
   module: number;
   title: string;
-  topics: { title: string; slug: string }[];
+  topics?: Topic[];
+  subModules?: SubModule[];
 }
