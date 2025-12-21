@@ -63,6 +63,10 @@ import { sharedMemory } from './shared-memory';
 import { eventBus } from './event-bus';
 import { stateSynchronization } from './state-synchronization';
 import { multiAgentPatterns } from './multi-agent-patterns';
+import { sequentialPipeline } from './sequential-pipeline';
+import { parallelExecution } from './parallel-execution';
+import { hierarchicalPattern } from './hierarchical-pattern';
+import { collaborativePattern } from './collaborative-pattern';
 
 // Re-export types
 export type { Article, Module, SubModule, Topic };
@@ -131,6 +135,10 @@ const articles: Record<string, Article> = {
   'event-bus': eventBus,
   'state-synchronization': stateSynchronization,
   'multi-agent-patterns': multiAgentPatterns,
+  'sequential-pipeline': sequentialPipeline,
+  'parallel-execution': parallelExecution,
+  'hierarchical-pattern': hierarchicalPattern,
+  'collaborative-pattern': collaborativePattern,
 };
 
 // Docs Roadmap - Modules and Topics
