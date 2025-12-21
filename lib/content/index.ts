@@ -48,6 +48,7 @@ import { explicitVsImplicitState } from './explicit-vs-implicit-state';
 import { transitionGuards } from './transition-guards';
 import { errorStatesRecovery } from './error-states-recovery';
 import { loopDetectionTermination } from './loop-detection-termination';
+import { memoryInAgents } from './memory-in-agents';
 
 // Re-export types
 export type { Article, Module, SubModule, Topic };
@@ -101,6 +102,7 @@ const articles: Record<string, Article> = {
   'transition-guards': transitionGuards,
   'error-states-recovery': errorStatesRecovery,
   'loop-detection-termination': loopDetectionTermination,
+  'memory-in-agents': memoryInAgents,
 };
 
 // Docs Roadmap - Modules and Topics

@@ -41,6 +41,53 @@ flowchart LR
 - No real-time data access
 - Can't perform actual actions
 
+## The Core Philosophy
+
+### LLMs are Brains, Not Hands
+
+Think of an LLM like a smart person locked in a room with no internet, no phone, and only books from 2 years ago. They can:
+- **Think** and reason
+- **Decide** what to do
+- **Explain** concepts
+- **Format** information nicely
+
+But they **cannot**:
+- Check today's stock price
+- Send an email
+- Look up current weather
+- Query your database
+
+**Tools are the hands** that let the brain interact with the real world.
+
+### The Trust Hierarchy
+
+\`\`\`mermaid
+flowchart TD
+    A[Tool Data] -->|Most Trusted| B[Real-time, Verified]
+    C[Retrieved Docs] -->|Medium Trust| D[From your database]
+    E[LLM Knowledge] -->|Least Trusted| F[May be outdated/wrong]
+\`\`\`
+
+| Source | Trust Level | Example |
+|--------|-------------|---------|
+| **Tool output** | Highest | API response, DB query |
+| **Retrieved context** | Medium | RAG documents |
+| **LLM memory** | Lowest | Training knowledge |
+
+**Rule:** Always prefer higher trust sources when available.
+
+### Why LLMs Hallucinate Facts
+
+LLMs don't "know" facts - they predict likely text. When asked "What's Apple's stock price?", the LLM generates a plausible-sounding number, not the real one.
+
+\`\`\`
+User: What's Apple stock price?
+LLM (guessing): "Apple is currently trading at $178.50"
+Reality: Could be $165 or $195 - LLM has no idea!
+\`\`\`
+
+**Tool-First prevents this** by fetching real data before responding.
+
 ## The Pattern
 
 \`\`\`mermaid
@@ -156,6 +203,47 @@ flowchart TD
     C -->|No| E[Tell user you can't verify]
     B -->|No| F[LLM can answer directly]
 \`\`\`
+
+## Common Mistakes
+
+### Mistake 1: Tool as Afterthought
+
+\`\`\`
+❌ Wrong: LLM answers first, then maybe checks
+✅ Right: Check tool first, then format answer
+\`\`\`
+
+### Mistake 2: Over-relying on LLM Knowledge
+
+\`\`\`
+User: "What's the latest news about Tesla?"
+❌ Wrong: LLM talks about old news from training
+✅ Right: Use search tool → Get today's news → Format response
+\`\`\`
+
+### Mistake 3: Not Defining Clear Tool Boundaries
+
+Define exactly what each tool does:
+
+| Tool | Input | Output | When to Use |
+|------|-------|--------|-------------|
+| \`weather\` | city name | temp, humidity | Weather questions |
+| \`calculator\` | math expression | result | Any calculation |
+| \`search\` | query | web results | Current events |
+
+## Real-World Example
+
+**Task:** "Should I carry an umbrella today in Delhi?"
+
+\`\`\`mermaid
+flowchart LR
+    A[Question] --> B[Need weather data]
+    B --> C[Call weather tool]
+    C --> D[Rain: 80% chance]
+    D --> E[LLM formats: Yes, carry umbrella!]
+\`\`\`
+
+Without Tool-First, LLM might say "Delhi is generally hot" - useless!
 
 ## Key Takeaways
 
