@@ -49,6 +49,11 @@ import { transitionGuards } from './transition-guards';
 import { errorStatesRecovery } from './error-states-recovery';
 import { loopDetectionTermination } from './loop-detection-termination';
 import { memoryInAgents } from './memory-in-agents';
+import { agentRoles } from './agent-roles';
+import { supervisorAgent } from './supervisor-agent';
+import { workerAgents } from './worker-agents';
+import { planningAgent } from './planning-agent';
+import { memoryAgent } from './memory-agent';
 
 // Re-export types
 export type { Article, Module, SubModule, Topic };
@@ -103,6 +108,11 @@ const articles: Record<string, Article> = {
   'error-states-recovery': errorStatesRecovery,
   'loop-detection-termination': loopDetectionTermination,
   'memory-in-agents': memoryInAgents,
+  'agent-roles': agentRoles,
+  'supervisor-agent': supervisorAgent,
+  'worker-agents': workerAgents,
+  'planning-agent': planningAgent,
+  'memory-agent': memoryAgent,
 };
 
 // Docs Roadmap - Modules and Topics
