@@ -91,13 +91,33 @@ const info = memory.recall("what language does user prefer");
 // Returns: "likes Python over JavaScript"
 \`\`\`
 
-## Memory Agent vs Memory System
+## Example Prompts
 
-| Memory Agent | Memory System |
-|--------------|---------------|
-| Decides WHAT to store | HOW to store |
-| Knows WHEN to recall | Storage mechanism |
-| Manages relevance | Database operations |
+Extract memories from conversation:
+\`\`\`
+Analyze this conversation and extract information worth remembering:
+
+Conversation: {conversation}
+
+Extract:
+1. User facts (name, job, location)
+2. Preferences (likes, dislikes, settings)
+3. Important events mentioned
+
+Format as JSON:
+{"facts": [...], "preferences": [...], "events": [...]}
+\`\`\`
+
+Recall relevant memories:
+\`\`\`
+Given this query, find relevant memories:
+
+Query: {user_query}
+Available memories: {memories}
+
+Return only memories that are relevant to answering this query.
+Rank by relevance.
+\`\`\`
 
 ## Key Point
 

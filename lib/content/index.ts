@@ -54,6 +54,15 @@ import { supervisorAgent } from './supervisor-agent';
 import { workerAgents } from './worker-agents';
 import { planningAgent } from './planning-agent';
 import { memoryAgent } from './memory-agent';
+import { evaluationAgent } from './evaluation-agent';
+import { verificationAgent } from './verification-agent';
+import { reflectionAgent } from './reflection-agent';
+import { multiAgentCommunication } from './multi-agent-communication';
+import { messagePassing } from './message-passing';
+import { sharedMemory } from './shared-memory';
+import { eventBus } from './event-bus';
+import { stateSynchronization } from './state-synchronization';
+import { multiAgentPatterns } from './multi-agent-patterns';
 
 // Re-export types
 export type { Article, Module, SubModule, Topic };
@@ -113,6 +122,15 @@ const articles: Record<string, Article> = {
   'worker-agents': workerAgents,
   'planning-agent': planningAgent,
   'memory-agent': memoryAgent,
+  'evaluation-agent': evaluationAgent,
+  'verification-agent': verificationAgent,
+  'reflection-agent': reflectionAgent,
+  'multi-agent-communication': multiAgentCommunication,
+  'message-passing': messagePassing,
+  'shared-memory': sharedMemory,
+  'event-bus': eventBus,
+  'state-synchronization': stateSynchronization,
+  'multi-agent-patterns': multiAgentPatterns,
 };
 
 // Docs Roadmap - Modules and Topics

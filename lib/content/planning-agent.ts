@@ -95,12 +95,36 @@ const steps = await planner.createPlan("Build a todo app");
 // Returns: ["1. Create project structure", "2. Design database schema", ...]
 \`\`\`
 
+## Example Prompt
+
+\`\`\`
+You are a Planning Agent. Your job is to create detailed step-by-step plans.
+
+Goal: {goal}
+Context: {context}
+Available tools: {tools}
+
+Create a plan with these rules:
+1. Each step should be ONE specific action
+2. Steps should be in logical order
+3. Include what tool to use for each step
+4. Include success criteria for each step
+
+Format:
+Step 1: [Action] - Tool: [tool_name] - Done when: [criteria]
+Step 2: [Action] - Tool: [tool_name] - Done when: [criteria]
+...
+\`\`\`
+
 ## Good Plan Characteristics
 
-- **Specific** - Each step is clear action
-- **Ordered** - Steps in logical sequence
-- **Atomic** - One action per step
-- **Verifiable** - Can check if step is done
+Specific - Each step is clear action
+
+Ordered - Steps in logical sequence
+
+Atomic - One action per step
+
+Verifiable - Can check if step is done
 
 ## Key Point
 

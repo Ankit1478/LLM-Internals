@@ -133,6 +133,38 @@ const advice = reflector.getAdvice("Parse date from user");
 5. Next similar task uses that lesson
 6. System gets smarter over time
 
+## Example Prompts
+
+Reflect on failure:
+\`\`\`
+You are a Reflection Agent. Your job is to learn from failures.
+
+Task: {task}
+Attempt: {what_we_tried}
+Error: {what_went_wrong}
+
+Analyze this failure:
+
+1. ROOT CAUSE: Why did this fail? (be specific)
+2. MISTAKE: What was the key mistake?
+3. LESSON: What should we remember for next time?
+4. IMPROVEMENT: How should we approach this differently?
+
+Format the lesson as a single sentence that can be stored and reused.
+\`\`\`
+
+Get advice for new task:
+\`\`\`
+You are checking if past lessons apply to a new task.
+
+New task: {new_task}
+Past lessons: {lessons}
+
+Are any of these lessons relevant to this task?
+If yes, explain how to apply them.
+If no, say "No relevant lessons found."
+\`\`\`
+
 ## When to Use
 
 After task failures

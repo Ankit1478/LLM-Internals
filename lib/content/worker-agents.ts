@@ -80,12 +80,51 @@ class ResearchWorker {
 }
 \`\`\`
 
+## Example Prompts
+
+CodeWorker Prompt:
+\`\`\`
+You are an expert programmer. Your only job is to write clean, working code.
+
+Task: {task}
+Language: {language}
+
+Write the code. Include comments. Handle edge cases.
+Output only the code, no explanations.
+\`\`\`
+
+ResearchWorker Prompt:
+\`\`\`
+You are a research assistant. Your job is to find accurate information.
+
+Query: {query}
+Sources: {search_results}
+
+Summarize the key findings. Cite your sources.
+If information is uncertain, say so.
+\`\`\`
+
+WriterWorker Prompt:
+\`\`\`
+You are a content writer. Your job is to create clear, engaging content.
+
+Topic: {topic}
+Style: {style}
+Length: {length}
+
+Write the content. Make it easy to read.
+Use simple language.
+\`\`\`
+
 ## Worker Design Rules
 
-1. **One specialty** - Each worker does one thing well
-2. **Clear interface** - All workers have \`execute(task)\` method
-3. **Right tools** - Give workers only tools they need
-4. **Focused prompt** - Tell worker its role clearly
+One specialty - Each worker does one thing well
+
+Clear interface - All workers have execute(task) method
+
+Right tools - Give workers only tools they need
+
+Focused prompt - Tell worker its role clearly
 
 ## Key Point
 

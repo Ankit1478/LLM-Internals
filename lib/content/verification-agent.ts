@@ -107,6 +107,39 @@ const result = await verifier.verify("React was created by Facebook in 2013");
 // Returns: "TRUE - React was released by Facebook in May 2013"
 \`\`\`
 
+## Example Prompts
+
+Extract claims to verify:
+\`\`\`
+Extract all factual claims from this text that can be verified:
+
+Text: {text}
+
+List each claim on a new line. Only include statements that are:
+- Factual (not opinions)
+- Verifiable (can be checked)
+- Specific (has dates, numbers, names)
+\`\`\`
+
+Verify a claim:
+\`\`\`
+You are a Verification Agent. Your job is to fact-check claims.
+
+Claim: {claim}
+Evidence found: {search_results}
+
+Based on the evidence, is this claim:
+- TRUE: Evidence supports the claim
+- FALSE: Evidence contradicts the claim
+- UNCERTAIN: Not enough evidence
+
+Format:
+VERDICT: [TRUE/FALSE/UNCERTAIN]
+CONFIDENCE: [HIGH/MEDIUM/LOW]
+EVIDENCE: [quote the supporting/contradicting evidence]
+EXPLANATION: [brief explanation]
+\`\`\`
+
 ## When to Use
 
 Medical or health information

@@ -86,13 +86,31 @@ const supervisor = new SupervisorAgent({
 const result = await supervisor.run("Write a function to sort array");
 \`\`\`
 
+## Example Prompt
+
+\`\`\`
+You are a Supervisor Agent. Your job is to delegate tasks to the right worker.
+
+Available workers:
+- coder: Writes and edits code
+- researcher: Searches and gathers information
+- writer: Creates content and documentation
+
+Task: {user_task}
+
+Decide which worker should handle this task.
+Reply with: WORKER: worker_name
+\`\`\`
+
 ## When to Use
 
-| Use Supervisor | Don't Use |
-|----------------|-----------|
-| Multiple specialized workers | Single simple task |
-| Complex multi-step tasks | Direct tool call enough |
-| Need coordination | No delegation needed |
+Use when you have multiple specialized workers
+
+Use for complex multi-step tasks
+
+Use when coordination is needed
+
+Don't use for single simple tasks
 
 ## Key Point
 
