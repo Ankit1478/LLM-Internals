@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const parallelExecution: Article = {
-  module: 3,
+  module: 2,
   slug: 'parallel-execution',
   title: 'Parallel Execution',
   description: 'Multiple agents work simultaneously on different tasks',
@@ -351,6 +351,6 @@ Focus only on your area of expertise.
 
 Parallel Execution = Multiple workers, same time. Fast for independent tasks. Remember to handle failures and combine results properly.
 `,
-  previousTopic: { module: 3, slug: 'sequential-pipeline', title: 'Sequential Pipeline' },
-  nextTopic: { module: 3, slug: 'hierarchical-pattern', title: 'Hierarchical' },
+  previousTopic: { module: 2, slug: 'sequential-pipeline', title: 'Sequential Pipeline' },
+  nextTopic: { module: 2, slug: 'hierarchical-pattern', title: 'Hierarchical' },
 };

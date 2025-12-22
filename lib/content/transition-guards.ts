@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const transitionGuards: Article = {
-  module: 3,
+  module: 2,
   slug: 'transition-guards',
   title: 'Transition Guards',
   description: 'Conditions that must be true before state changes',
@@ -100,6 +100,6 @@ class GuardedStateMachine {
 
 **Guards prevent invalid transitions** - agent can't execute without a plan.
 `,
-  previousTopic: { module: 3, slug: 'explicit-vs-implicit-state', title: 'Explicit vs Implicit State' },
-  nextTopic: { module: 3, slug: 'error-states-recovery', title: 'Error States & Recovery' },
+  previousTopic: { module: 2, slug: 'explicit-vs-implicit-state', title: 'Explicit vs Implicit State' },
+  nextTopic: { module: 2, slug: 'error-states-recovery', title: 'Error States & Recovery' },
 };

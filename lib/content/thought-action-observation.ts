@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const thoughtActionObservation: Article = {
-  module: 3,
+  module: 2,
   slug: 'thought-action-observation',
   title: 'Thought–Action–Observation Loop',
   description: 'Deep dive into the three components that make agents intelligent',
@@ -666,6 +666,6 @@ flowchart TD
 
 This loop is the foundation of intelligent AI agents. Master it, and you can build any kind of agent!
 `,
-  previousTopic: { module: 3, slug: 'react-pattern', title: 'ReAct Pattern' },
-  nextTopic: { module: 3, slug: 'tool-first-execution', title: 'Tool-First Execution Pattern' },
+  previousTopic: { module: 2, slug: 'react-pattern', title: 'ReAct Pattern' },
+  nextTopic: { module: 2, slug: 'tool-first-execution', title: 'Tool-First Execution Pattern' },
 };

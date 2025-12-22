@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const contextWindow: Article = {
-  module: 2,
+  module: 1,
   slug: 'context-window',
   title: 'Context Window vs Working Memory',
   description: 'What AI can see vs what it can actually use',
   readTime: 4,
-  previousTopic: { module: 2, slug: 'memory-implications', title: '16. Memory Implications' },
-  nextTopic: { module: 2, slug: 'context-decay', title: '18. Context Decay & Lost-in-the-Middle' },
+  previousTopic: { module: 1, slug: 'memory-implications', title: '16. Memory Implications' },
+  nextTopic: { module: 1, slug: 'context-decay', title: '18. Context Decay & Lost-in-the-Middle' },
   content: `# Context Window vs Working Memory
 
 ## What's the Difference?

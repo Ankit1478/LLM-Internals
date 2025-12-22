@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const memoryImplications: Article = {
-  module: 2,
+  module: 1,
   slug: 'memory-implications',
   title: 'Memory Implications',
   description: 'How much memory AI models really need and why',
   readTime: 5,
-  previousTopic: { module: 2, slug: 'paged-attention', title: '15. PagedAttention' },
-  nextTopic: { module: 2, slug: 'context-window', title: '17. Context Window vs Working Memory' },
+  previousTopic: { module: 1, slug: 'paged-attention', title: '15. PagedAttention' },
+  nextTopic: { module: 1, slug: 'context-window', title: '17. Context Window vs Working Memory' },
   content: `# Memory Implications
 
 ## How Much Memory Do AI Models Need?

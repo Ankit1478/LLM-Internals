@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const reactPattern: Article = {
-  module: 3,
+  module: 2,
   slug: 'react-pattern',
   title: 'ReAct Pattern',
   description: 'The most important pattern for building AI Agents - Reasoning + Acting together',
@@ -867,6 +867,6 @@ flowchart LR
 
 In the next lesson, we'll dive deeper into the **Thought-Action-Observation Loop** and learn advanced techniques for each component.
 `,
-  previousTopic: { module: 3, slug: 'stateless-vs-stateful', title: 'Stateless vs Stateful Agents' },
-  nextTopic: { module: 3, slug: 'thought-action-observation', title: 'Thought–Action–Observation Loop' },
+  previousTopic: { module: 2, slug: 'stateless-vs-stateful', title: 'Stateless vs Stateful Agents' },
+  nextTopic: { module: 2, slug: 'thought-action-observation', title: 'Thought–Action–Observation Loop' },
 };

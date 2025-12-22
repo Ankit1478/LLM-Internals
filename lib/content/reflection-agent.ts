@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const reflectionAgent: Article = {
-  module: 3,
+  module: 2,
   slug: 'reflection-agent',
   title: 'Reflection Agent',
   description: 'Learns from mistakes and improves over time',
@@ -179,6 +179,6 @@ When same mistakes keep happening
 
 Reflection Agent = Learning Coach. Failures become lessons, lessons prevent future failures.
 `,
-  previousTopic: { module: 3, slug: 'verification-agent', title: 'Verification Agent' },
-  nextTopic: { module: 3, slug: 'multi-agent-communication', title: 'Multi-Agent Communication' },
+  previousTopic: { module: 2, slug: 'verification-agent', title: 'Verification Agent' },
+  nextTopic: { module: 2, slug: 'multi-agent-communication', title: 'Multi-Agent Communication' },
 };

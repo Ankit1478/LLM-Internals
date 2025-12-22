@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const evaluationAgent: Article = {
-  module: 3,
+  module: 2,
   slug: 'evaluation-agent',
   title: 'Evaluation Agent',
   description: 'Checks quality of work before delivery',
@@ -131,6 +131,6 @@ When accuracy matters
 
 Evaluation Agent = Quality Gate. Nothing goes out without passing inspection.
 `,
-  previousTopic: { module: 3, slug: 'memory-agent', title: 'Memory Agent' },
-  nextTopic: { module: 3, slug: 'verification-agent', title: 'Verification Agent' },
+  previousTopic: { module: 2, slug: 'memory-agent', title: 'Memory Agent' },
+  nextTopic: { module: 2, slug: 'verification-agent', title: 'Verification Agent' },
 };

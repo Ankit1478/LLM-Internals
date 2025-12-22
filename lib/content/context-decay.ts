@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const contextDecay: Article = {
-  module: 2,
+  module: 1,
   slug: 'context-decay',
   title: 'Context Decay & Lost-in-the-Middle',
   description: 'Why AI forgets stuff in the middle of long conversations',
   readTime: 4,
-  previousTopic: { module: 2, slug: 'context-window', title: '17. Context Window vs Working Memory' },
-  nextTopic: { module: 2, slug: 'needle-haystack', title: '19. Needle-in-Haystack Tests' },
+  previousTopic: { module: 1, slug: 'context-window', title: '17. Context Window vs Working Memory' },
+  nextTopic: { module: 1, slug: 'needle-haystack', title: '19. Needle-in-Haystack Tests' },
   content: `# Context Decay & Lost-in-the-Middle
 
 ## What Is This Problem?

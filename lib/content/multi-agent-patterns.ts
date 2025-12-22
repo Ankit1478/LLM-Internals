@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const multiAgentPatterns: Article = {
-  module: 3,
+  module: 2,
   slug: 'multi-agent-patterns',
   title: 'Multi-Agent Patterns',
   description: 'Common patterns for organizing multiple agents',
@@ -284,6 +284,6 @@ Often you combine patterns: Hierarchical supervisor uses Parallel workers.
 
 Pick the pattern that matches your task structure. Simple tasks need simple patterns.
 `,
-  previousTopic: { module: 3, slug: 'state-synchronization', title: 'State Synchronization' },
-  nextTopic: { module: 3, slug: 'sequential-pipeline', title: 'Sequential Pipeline' },
+  previousTopic: { module: 2, slug: 'state-synchronization', title: 'State Synchronization' },
+  nextTopic: { module: 2, slug: 'sequential-pipeline', title: 'Sequential Pipeline' },
 };

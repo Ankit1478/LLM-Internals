@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const needleHaystack: Article = {
-  module: 2,
+  module: 1,
   slug: 'needle-haystack',
   title: 'Needle-in-Haystack Tests',
   description: 'Testing if AI can find hidden information in long text',
   readTime: 4,
-  previousTopic: { module: 2, slug: 'context-decay', title: '18. Context Decay & Lost-in-the-Middle' },
-  nextTopic: { module: 2, slug: 'reasoning-patterns', title: '20. Reasoning vs Pattern-Following' },
+  previousTopic: { module: 1, slug: 'context-decay', title: '18. Context Decay & Lost-in-the-Middle' },
+  nextTopic: { module: 1, slug: 'reasoning-patterns', title: '20. Reasoning vs Pattern-Following' },
   content: `# Needle-in-Haystack Tests
 
 ## What Is This Test?

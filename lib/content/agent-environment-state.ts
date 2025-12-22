@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const agentEnvironmentState: Article = {
-  module: 3,
+  module: 2,
   slug: 'agent-environment-state',
   title: 'Environment, State, Actions, Observations',
   description: 'The 4 building blocks every AI Agent needs to work',
@@ -559,6 +559,6 @@ flowchart LR
 
 **Remember:** Environment → State → Action → Observation → New State!
 `,
-  previousTopic: { module: 3, slug: 'agent-lifecycle', title: 'Agent Lifecycle' },
-  nextTopic: { module: 3, slug: 'deterministic-vs-probabilistic', title: 'Deterministic vs Probabilistic Agents' },
+  previousTopic: { module: 2, slug: 'agent-lifecycle', title: 'Agent Lifecycle' },
+  nextTopic: { module: 2, slug: 'deterministic-vs-probabilistic', title: 'Deterministic vs Probabilistic Agents' },
 };

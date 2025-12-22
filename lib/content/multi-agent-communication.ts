@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const multiAgentCommunication: Article = {
-  module: 3,
+  module: 2,
   slug: 'multi-agent-communication',
   title: 'Multi-Agent Communication',
   description: 'How agents talk to each other in multi-agent systems',
@@ -136,6 +136,6 @@ State Sync: Consistent, complex to implement
 
 Choose communication method based on your needs. Message passing for direct coordination, shared memory for common data.
 `,
-  previousTopic: { module: 3, slug: 'reflection-agent', title: 'Reflection Agent' },
-  nextTopic: { module: 3, slug: 'message-passing', title: 'Message Passing' },
+  previousTopic: { module: 2, slug: 'reflection-agent', title: 'Reflection Agent' },
+  nextTopic: { module: 2, slug: 'message-passing', title: 'Message Passing' },
 };

@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const agentStateMachines: Article = {
-  module: 3,
+  module: 2,
   slug: 'agent-state-machines',
   title: 'State Machines for Agents',
   description: 'Control agent behavior with defined states and transitions',
@@ -139,6 +139,6 @@ class AgentStateMachine {
 | **Control transitions** | Prevent invalid jumps |
 | **Always have exit** | Avoid stuck states |
 `,
-  previousTopic: { module: 3, slug: 'reactive-vs-deliberative', title: 'Reactive vs Deliberative Agents' },
-  nextTopic: { module: 3, slug: 'explicit-vs-implicit-state', title: 'Explicit vs Implicit State' },
+  previousTopic: { module: 2, slug: 'reactive-vs-deliberative', title: 'Reactive vs Deliberative Agents' },
+  nextTopic: { module: 2, slug: 'explicit-vs-implicit-state', title: 'Explicit vs Implicit State' },
 };

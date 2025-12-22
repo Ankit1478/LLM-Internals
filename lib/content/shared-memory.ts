@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const sharedMemory: Article = {
-  module: 3,
+  module: 2,
   slug: 'shared-memory',
   title: 'Shared Memory',
   description: 'Common storage that all agents can read and write',
@@ -181,6 +181,6 @@ Use message passing for direct commands. Use shared memory for shared state.
 
 Shared Memory = Whiteboard in office. Everyone can see it, anyone can write on it.
 `,
-  previousTopic: { module: 3, slug: 'message-passing', title: 'Message Passing' },
-  nextTopic: { module: 3, slug: 'event-bus', title: 'Event Bus' },
+  previousTopic: { module: 2, slug: 'message-passing', title: 'Message Passing' },
+  nextTopic: { module: 2, slug: 'event-bus', title: 'Event Bus' },
 };

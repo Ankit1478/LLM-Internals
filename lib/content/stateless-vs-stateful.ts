@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const statelessVsStateful: Article = {
-  module: 3,
+  module: 2,
   slug: 'stateless-vs-stateful',
   title: 'Stateless vs Stateful Agents',
   description: 'Understanding agents with and without memory',
@@ -498,6 +498,6 @@ flowchart LR
 - Need to remember user? → **Stateful**
 - High scale, simple queries? → **Stateless**
 `,
-  previousTopic: { module: 3, slug: 'deterministic-vs-probabilistic', title: 'Deterministic vs Probabilistic Agents' },
-  nextTopic: { module: 3, slug: 'react-pattern', title: 'ReAct Pattern' },
+  previousTopic: { module: 2, slug: 'deterministic-vs-probabilistic', title: 'Deterministic vs Probabilistic Agents' },
+  nextTopic: { module: 2, slug: 'react-pattern', title: 'ReAct Pattern' },
 };

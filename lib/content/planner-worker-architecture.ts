@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const plannerWorkerArchitecture: Article = {
-  module: 3,
+  module: 2,
   slug: 'planner-worker-architecture',
   title: 'Planner + Worker Architecture',
   description: 'Separate brain from hands - one plans, others execute',
@@ -195,6 +195,6 @@ sequenceDiagram
 | **Central coordination** | Planner manages the flow |
 | **Scalable** | Add more workers as needed |
 `,
-  previousTopic: { module: 3, slug: 'planning-vs-execution', title: 'Planning vs Execution Separation' },
-  nextTopic: { module: 3, slug: 'reactive-vs-deliberative', title: 'Reactive vs Deliberative Agents' },
+  previousTopic: { module: 2, slug: 'planning-vs-execution', title: 'Planning vs Execution Separation' },
+  nextTopic: { module: 2, slug: 'reactive-vs-deliberative', title: 'Reactive vs Deliberative Agents' },
 };

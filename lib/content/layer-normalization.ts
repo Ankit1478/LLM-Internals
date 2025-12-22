@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const layerNormalization: Article = {
-  module: 2,
+  module: 1,
   slug: 'layer-normalization',
   title: 'Layer Normalization',
   description: 'How transformers keep values stable during training and inference',
   readTime: 5,
-  previousTopic: { module: 2, slug: 'feed-forward-networks', title: '6. Feed-Forward Networks' },
-  nextTopic: { module: 2, slug: 'residual-connections', title: '8. Residual Connections' },
+  previousTopic: { module: 1, slug: 'feed-forward-networks', title: '6. Feed-Forward Networks' },
+  nextTopic: { module: 1, slug: 'residual-connections', title: '8. Residual Connections' },
   content: `# Layer Normalization
 
 ## Part of Transformer Architecture

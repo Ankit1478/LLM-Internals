@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const tokensTokenization: Article = {
-  module: 2,
+  module: 1,
   slug: 'tokens-tokenization',
   title: 'Tokens & Tokenization',
   description: 'Understanding how AI breaks text into tokens',

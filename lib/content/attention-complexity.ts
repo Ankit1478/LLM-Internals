@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const attentionComplexity: Article = {
-  module: 2,
+  module: 1,
   slug: 'attention-complexity',
   title: 'Attention Mechanics & Complexity',
   description: 'Understanding the computational cost and mechanics of attention operations',
   readTime: 6,
-  previousTopic: { module: 2, slug: 'residual-connections', title: '8. Residual Connections' },
-  nextTopic: { module: 2, slug: 'causal-masking', title: '10. Causal Masking' },
+  previousTopic: { module: 1, slug: 'residual-connections', title: '8. Residual Connections' },
+  nextTopic: { module: 1, slug: 'causal-masking', title: '10. Causal Masking' },
   content: `# Attention Mechanics & Complexity
 
 ## Part of Transformer Architecture

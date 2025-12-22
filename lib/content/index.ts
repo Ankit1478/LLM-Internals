@@ -145,21 +145,13 @@ const articles: Record<string, Article> = {
 export const docsRoadmap: Module[] = [
   {
     module: 0,
-    title: 'Getting Started',
-    topics: [
-      { title: 'Introduction', slug: 'introduction' },
-      { title: 'Quick Start Guide', slug: 'quick-start' },
-    ]
-  },
-  {
-    module: 1,
     title: 'Complete Basics of Full Stack',
     topics: [
       { title: 'Full Stack Basics', slug: 'fullstack-basics' },
     ]
   },
   {
-    module: 2,
+    module: 1,
     title: 'LLM Internals',
     topics: [
       // 1. Basics - Start here
@@ -201,7 +193,7 @@ export const docsRoadmap: Module[] = [
     ]
   },
   {
-    module: 3,
+    module: 2,
     title: 'Agents',
     subModules: [
       {

@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const whatIsAiAgent: Article = {
-  module: 3,
+  module: 2,
   slug: 'what-is-ai-agent',
   title: 'What is an AI Agent?',
   description: 'Understanding AI Agents with simple real-life examples and diagrams',
@@ -261,5 +261,5 @@ In the next lesson, we'll learn the difference between:
 
 This will help you understand WHEN to use agents!
 `,
-  nextTopic: { module: 3, slug: 'agent-vs-prompt-vs-workflow', title: 'Agent vs Prompt vs Workflow' },
+  nextTopic: { module: 2, slug: 'agent-vs-prompt-vs-workflow', title: 'Agent vs Prompt vs Workflow' },
 };

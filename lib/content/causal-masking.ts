@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const causalMasking: Article = {
-  module: 2,
+  module: 1,
   slug: 'causal-masking',
   title: 'Causal Masking',
   description: 'How language models prevent looking into the future during text generation',
   readTime: 5,
-  previousTopic: { module: 2, slug: 'attention-complexity', title: '9. Attention Mechanics & Complexity' },
-  nextTopic: { module: 2, slug: 'multi-query-attention', title: '11. Multi-Query Attention' },
+  previousTopic: { module: 1, slug: 'attention-complexity', title: '9. Attention Mechanics & Complexity' },
+  nextTopic: { module: 1, slug: 'multi-query-attention', title: '11. Multi-Query Attention' },
   content: `# Causal Masking
 
 ## What is Causal Masking?

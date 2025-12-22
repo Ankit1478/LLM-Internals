@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const supervisorAgent: Article = {
-  module: 3,
+  module: 2,
   slug: 'supervisor-agent',
   title: 'Supervisor Agent',
   description: 'The manager that coordinates other agents',
@@ -116,6 +116,6 @@ Don't use for single simple tasks
 
 **Supervisor = Router + Coordinator.** It picks the right agent and manages the flow.
 `,
-  previousTopic: { module: 3, slug: 'agent-roles', title: 'Agent Roles' },
-  nextTopic: { module: 3, slug: 'worker-agents', title: 'Worker Agents' },
+  previousTopic: { module: 2, slug: 'agent-roles', title: 'Agent Roles' },
+  nextTopic: { module: 2, slug: 'worker-agents', title: 'Worker Agents' },
 };

@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const selfAttention: Article = {
-  module: 2,
+  module: 1,
   slug: 'self-attention',
   title: 'Self-Attention Mechanism',
   description: 'How AI focuses on important words in a sentence',
   readTime: 5,
-  previousTopic: { module: 2, slug: 'transformers-architecture', title: '3. Transformers Architecture' },
-  nextTopic: { module: 2, slug: 'multi-head-attention', title: '5. Multi-Head Attention' },
+  previousTopic: { module: 1, slug: 'transformers-architecture', title: '3. Transformers Architecture' },
+  nextTopic: { module: 1, slug: 'multi-head-attention', title: '5. Multi-Head Attention' },
   content: `# Self-Attention Mechanism
 
 ## Part of Transformer Architecture

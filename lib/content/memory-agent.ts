@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const memoryAgent: Article = {
-  module: 3,
+  module: 2,
   slug: 'memory-agent',
   title: 'Memory Agent',
   description: 'Stores and retrieves information for other agents',
@@ -123,6 +123,6 @@ Rank by relevance.
 
 **Memory Agent = Smart Librarian.** Knows what's worth keeping and can find it fast.
 `,
-  previousTopic: { module: 3, slug: 'planning-agent', title: 'Planning Agent' },
-  nextTopic: { module: 3, slug: 'evaluation-agent', title: 'Evaluation Agent' },
+  previousTopic: { module: 2, slug: 'planning-agent', title: 'Planning Agent' },
+  nextTopic: { module: 2, slug: 'evaluation-agent', title: 'Evaluation Agent' },
 };

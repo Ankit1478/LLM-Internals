@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const explicitVsImplicitState: Article = {
-  module: 3,
+  module: 2,
   slug: 'explicit-vs-implicit-state',
   title: 'Explicit vs Implicit State',
   description: 'Visible state variables vs hidden context state',
@@ -86,6 +86,6 @@ function chatAgent(messages) {
 
 **Prefer explicit state** - easier to debug, save, and control.
 `,
-  previousTopic: { module: 3, slug: 'agent-state-machines', title: 'State Machines for Agents' },
-  nextTopic: { module: 3, slug: 'transition-guards', title: 'Transition Guards' },
+  previousTopic: { module: 2, slug: 'agent-state-machines', title: 'State Machines for Agents' },
+  nextTopic: { module: 2, slug: 'transition-guards', title: 'Transition Guards' },
 };

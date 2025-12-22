@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const rope: Article = {
-  module: 2,
+  module: 1,
   slug: 'rope',
   title: 'RoPE (Rotary Position Embedding)',
   description: 'A simple way to tell the model where words are in a sentence',
   readTime: 6,
-  previousTopic: { module: 2, slug: 'multi-query-attention', title: '11. Multi-Query Attention' },
-  nextTopic: { module: 2, slug: 'alibi', title: '13. ALiBi (Linear Biases)' },
+  previousTopic: { module: 1, slug: 'multi-query-attention', title: '11. Multi-Query Attention' },
+  nextTopic: { module: 1, slug: 'alibi', title: '13. ALiBi (Linear Biases)' },
   content: `# RoPE (Rotary Position Embedding)
 
 ## What is RoPE?

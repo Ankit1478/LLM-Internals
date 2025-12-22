@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const fullstackBasics: Article = {
-  module: 1,
+  module: 0,
   slug: 'fullstack-basics',
   title: 'Complete Basics of Full Stack',
   description: 'Master the fundamentals of full stack development',

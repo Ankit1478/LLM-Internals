@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const hierarchicalPattern: Article = {
-  module: 3,
+  module: 2,
   slug: 'hierarchical-pattern',
   title: 'Hierarchical Pattern',
   description: 'Boss agents manage and coordinate worker agents',
@@ -417,6 +417,6 @@ Resolve any conflicts between worker outputs.
 
 Hierarchical = Manager + Workers. Supervisor plans and delegates, workers execute, supervisor combines. Great for complex multi-part tasks.
 `,
-  previousTopic: { module: 3, slug: 'parallel-execution', title: 'Parallel Execution' },
-  nextTopic: { module: 3, slug: 'collaborative-pattern', title: 'Collaborative (Debate & Consensus)' },
+  previousTopic: { module: 2, slug: 'parallel-execution', title: 'Parallel Execution' },
+  nextTopic: { module: 2, slug: 'collaborative-pattern', title: 'Collaborative (Debate & Consensus)' },
 };

@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const sequentialPipeline: Article = {
-  module: 3,
+  module: 2,
   slug: 'sequential-pipeline',
   title: 'Sequential Pipeline',
   description: 'Agents work one after another in a chain',
@@ -271,6 +271,6 @@ Output your result for the next agent.
 
 Sequential Pipeline = Assembly Line. One agent finishes, next agent starts. Simple but powerful for ordered workflows.
 `,
-  previousTopic: { module: 3, slug: 'multi-agent-patterns', title: 'Multi-Agent Patterns' },
-  nextTopic: { module: 3, slug: 'parallel-execution', title: 'Parallel Execution' },
+  previousTopic: { module: 2, slug: 'multi-agent-patterns', title: 'Multi-Agent Patterns' },
+  nextTopic: { module: 2, slug: 'parallel-execution', title: 'Parallel Execution' },
 };

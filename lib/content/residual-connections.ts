@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const residualConnections: Article = {
-  module: 2,
+  module: 1,
   slug: 'residual-connections',
   title: 'Residual Connections',
   description: 'How skip connections enable training of very deep neural networks',
   readTime: 5,
-  previousTopic: { module: 2, slug: 'layer-normalization', title: '7. Layer Normalization' },
-  nextTopic: { module: 2, slug: 'attention-complexity', title: '9. Attention Mechanics & Complexity' },
+  previousTopic: { module: 1, slug: 'layer-normalization', title: '7. Layer Normalization' },
+  nextTopic: { module: 1, slug: 'attention-complexity', title: '9. Attention Mechanics & Complexity' },
   content: `# Residual Connections
 
 ## Part of Transformer Architecture

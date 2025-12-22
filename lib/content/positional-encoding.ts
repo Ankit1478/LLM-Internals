@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const positionalEncoding: Article = {
-  module: 2,
+  module: 1,
   slug: 'positional-encoding',
   title: 'Positional Encoding',
   description: 'How AI knows the order of words in a sentence',
   readTime: 4,
-  previousTopic: { module: 2, slug: 'tokens-tokenization', title: '1. Tokens & Tokenization' },
-  nextTopic: { module: 2, slug: 'transformers-architecture', title: '3. Transformers Architecture' },
+  previousTopic: { module: 1, slug: 'tokens-tokenization', title: '1. Tokens & Tokenization' },
+  nextTopic: { module: 1, slug: 'transformers-architecture', title: '3. Transformers Architecture' },
   content: `# Positional Encoding
 
 ## The Problem

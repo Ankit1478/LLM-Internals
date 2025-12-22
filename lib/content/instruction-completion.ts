@@ -1,12 +1,12 @@
 import { Article } from './types';
 
 export const instructionCompletion: Article = {
-  module: 2,
+  module: 1,
   slug: 'instruction-completion',
   title: 'Instruction Following vs Completion',
   description: 'Two different ways AI can respond to your input',
   readTime: 4,
-  previousTopic: { module: 2, slug: 'prompt-context', title: '22. Prompt Context Dynamics' },
+  previousTopic: { module: 1, slug: 'prompt-context', title: '22. Prompt Context Dynamics' },
   nextTopic: undefined, // Last topic in module!
   content: `# Instruction Following vs Completion
 

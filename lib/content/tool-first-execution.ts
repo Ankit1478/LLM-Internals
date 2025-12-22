@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const toolFirstExecution: Article = {
-  module: 3,
+  module: 2,
   slug: 'tool-first-execution',
   title: 'Tool-First Execution Pattern',
   description: 'Let tools do the work - agents should orchestrate, not guess',
@@ -254,6 +254,6 @@ Without Tool-First, LLM might say "Delhi is generally hot" - useless!
 | **Never guess** | If unsure, use tool or say "I don't know" |
 | **Verify first** | Tool data > LLM knowledge |
 `,
-  previousTopic: { module: 3, slug: 'thought-action-observation', title: 'Thought–Action–Observation Loop' },
-  nextTopic: { module: 3, slug: 'planning-vs-execution', title: 'Planning vs Execution Separation' },
+  previousTopic: { module: 2, slug: 'thought-action-observation', title: 'Thought–Action–Observation Loop' },
+  nextTopic: { module: 2, slug: 'planning-vs-execution', title: 'Planning vs Execution Separation' },
 };

@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const workerAgents: Article = {
-  module: 3,
+  module: 2,
   slug: 'worker-agents',
   title: 'Worker Agents',
   description: 'Specialized agents that execute specific tasks',
@@ -130,6 +130,6 @@ Focused prompt - Tell worker its role clearly
 
 **Workers = Specialists.** They don't decide what to do, they do what they're told - really well.
 `,
-  previousTopic: { module: 3, slug: 'supervisor-agent', title: 'Supervisor Agent' },
-  nextTopic: { module: 3, slug: 'planning-agent', title: 'Planning Agent' },
+  previousTopic: { module: 2, slug: 'supervisor-agent', title: 'Supervisor Agent' },
+  nextTopic: { module: 2, slug: 'planning-agent', title: 'Planning Agent' },
 };

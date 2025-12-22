@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const planningAgent: Article = {
-  module: 3,
+  module: 2,
   slug: 'planning-agent',
   title: 'Planning Agent',
   description: 'Creates step-by-step plans before execution',
@@ -130,6 +130,6 @@ Verifiable - Can check if step is done
 
 **Planner = Architect.** Creates the blueprint, doesn't build the house.
 `,
-  previousTopic: { module: 3, slug: 'worker-agents', title: 'Worker Agents' },
-  nextTopic: { module: 3, slug: 'memory-agent', title: 'Memory Agent' },
+  previousTopic: { module: 2, slug: 'worker-agents', title: 'Worker Agents' },
+  nextTopic: { module: 2, slug: 'memory-agent', title: 'Memory Agent' },
 };

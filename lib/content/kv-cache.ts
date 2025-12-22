@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const kvCache: Article = {
-  module: 2,
+  module: 1,
   slug: 'kv-cache',
   title: 'KV Cache',
   description: 'Saving work to make text generation faster',
   readTime: 5,
-  previousTopic: { module: 2, slug: 'alibi', title: '13. ALiBi (Linear Biases)' },
-  nextTopic: { module: 2, slug: 'paged-attention', title: '15. PagedAttention' },
+  previousTopic: { module: 1, slug: 'alibi', title: '13. ALiBi (Linear Biases)' },
+  nextTopic: { module: 1, slug: 'paged-attention', title: '15. PagedAttention' },
   content: `# KV Cache
 
 ## What is KV Cache?

@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const messagePassing: Article = {
-  module: 3,
+  module: 2,
   slug: 'message-passing',
   title: 'Message Passing',
   description: 'Direct communication between agents via messages',
@@ -189,6 +189,6 @@ Sequential workflows where order matters
 
 Message Passing = Direct mail. You know exactly who you're talking to.
 `,
-  previousTopic: { module: 3, slug: 'multi-agent-communication', title: 'Multi-Agent Communication' },
-  nextTopic: { module: 3, slug: 'shared-memory', title: 'Shared Memory' },
+  previousTopic: { module: 2, slug: 'multi-agent-communication', title: 'Multi-Agent Communication' },
+  nextTopic: { module: 2, slug: 'shared-memory', title: 'Shared Memory' },
 };

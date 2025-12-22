@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const multiQueryAttention: Article = {
-  module: 2,
+  module: 1,
   slug: 'multi-query-attention',
   title: 'Multi-Query Attention',
   description: 'How sharing keys and values across attention heads reduces memory and speeds up inference',
   readTime: 5,
-  previousTopic: { module: 2, slug: 'causal-masking', title: '10. Causal Masking' },
-  nextTopic: { module: 2, slug: 'rope', title: '12. RoPE (Rotary Position)' },
+  previousTopic: { module: 1, slug: 'causal-masking', title: '10. Causal Masking' },
+  nextTopic: { module: 1, slug: 'rope', title: '12. RoPE (Rotary Position)' },
   content: `# Multi-Query Attention (MQA)
 
 ## What is Multi-Query Attention?

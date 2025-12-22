@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const reasoningPatterns: Article = {
-  module: 2,
+  module: 1,
   slug: 'reasoning-patterns',
   title: 'Reasoning vs Pattern-Following',
   description: 'Does AI actually think or just match patterns?',
   readTime: 5,
-  previousTopic: { module: 2, slug: 'needle-haystack', title: '19. Needle-in-Haystack Tests' },
-  nextTopic: { module: 2, slug: 'hallucinations', title: '21. Why Hallucinations Happen' },
+  previousTopic: { module: 1, slug: 'needle-haystack', title: '19. Needle-in-Haystack Tests' },
+  nextTopic: { module: 1, slug: 'hallucinations', title: '21. Why Hallucinations Happen' },
   content: `# Reasoning vs Pattern-Following
 
 ## The Big Question

@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const loopDetectionTermination: Article = {
-  module: 3,
+  module: 2,
   slug: 'loop-detection-termination',
   title: 'Loop Detection & Termination',
   description: 'Prevent agents from running forever',
@@ -177,6 +177,6 @@ class LoopSafeAgent {
 | **Track action history** | Detect repetition |
 | **Multiple safeguards** | Belt and suspenders |
 `,
-  previousTopic: { module: 3, slug: 'error-states-recovery', title: 'Error States & Recovery' },
-  nextTopic: { module: 3, slug: 'why-agents-need-memory', title: 'Why Agents Need Memory' },
+  previousTopic: { module: 2, slug: 'error-states-recovery', title: 'Error States & Recovery' },
+  nextTopic: { module: 2, slug: 'why-agents-need-memory', title: 'Why Agents Need Memory' },
 };

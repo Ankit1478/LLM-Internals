@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const verificationAgent: Article = {
-  module: 3,
+  module: 2,
   slug: 'verification-agent',
   title: 'Verification Agent',
   description: 'Fact-checks outputs for accuracy',
@@ -156,6 +156,6 @@ Any content where accuracy is critical
 
 Verification Agent = Fact Checker. Don't trust, verify with evidence.
 `,
-  previousTopic: { module: 3, slug: 'evaluation-agent', title: 'Evaluation Agent' },
-  nextTopic: { module: 3, slug: 'reflection-agent', title: 'Reflection Agent' },
+  previousTopic: { module: 2, slug: 'evaluation-agent', title: 'Evaluation Agent' },
+  nextTopic: { module: 2, slug: 'reflection-agent', title: 'Reflection Agent' },
 };

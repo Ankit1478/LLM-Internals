@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const eventBus: Article = {
-  module: 3,
+  module: 2,
   slug: 'event-bus',
   title: 'Event Bus',
   description: 'Publish-subscribe pattern for agent communication',
@@ -148,6 +148,6 @@ For loose coupling between agents
 
 Event Bus = Radio broadcast. Publish once, anyone listening will hear it.
 `,
-  previousTopic: { module: 3, slug: 'shared-memory', title: 'Shared Memory' },
-  nextTopic: { module: 3, slug: 'state-synchronization', title: 'State Synchronization' },
+  previousTopic: { module: 2, slug: 'shared-memory', title: 'Shared Memory' },
+  nextTopic: { module: 2, slug: 'state-synchronization', title: 'State Synchronization' },
 };

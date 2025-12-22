@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const llmInternals: Article = {
-  module: 2,
+  module: 1,
   slug: 'llm-internals',
   title: 'LLM Internals',
   description: 'Deep dive into how Large Language Models work internally',

@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const agentVsPromptVsWorkflow: Article = {
-  module: 3,
+  module: 2,
   slug: 'agent-vs-prompt-vs-workflow',
   title: 'Agent vs Prompt vs Workflow',
   description: 'Understanding the key differences between Prompts, Workflows, and Agents',
@@ -453,6 +453,6 @@ Choose based on your needs:
 - Repeatable process? → **Workflow**
 - Complex, dynamic task? → **Agent**
 `,
-  previousTopic: { module: 3, slug: 'what-is-ai-agent', title: 'What is an AI Agent?' },
-  nextTopic: { module: 3, slug: 'agent-lifecycle', title: 'Agent Lifecycle' },
+  previousTopic: { module: 2, slug: 'what-is-ai-agent', title: 'What is an AI Agent?' },
+  nextTopic: { module: 2, slug: 'agent-lifecycle', title: 'Agent Lifecycle' },
 };

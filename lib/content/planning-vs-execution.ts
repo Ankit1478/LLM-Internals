@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const planningVsExecution: Article = {
-  module: 3,
+  module: 2,
   slug: 'planning-vs-execution',
   title: 'Planning vs Execution Separation',
   description: 'Plan first, execute later - the key to reliable agents',
@@ -257,6 +257,6 @@ flowchart LR
 
 **Remember:** Think like a chess player - plan your moves before you touch the pieces!
 `,
-  previousTopic: { module: 3, slug: 'tool-first-execution', title: 'Tool-First Execution Pattern' },
-  nextTopic: { module: 3, slug: 'planner-worker-architecture', title: 'Planner + Worker Architecture' },
+  previousTopic: { module: 2, slug: 'tool-first-execution', title: 'Tool-First Execution Pattern' },
+  nextTopic: { module: 2, slug: 'planner-worker-architecture', title: 'Planner + Worker Architecture' },
 };

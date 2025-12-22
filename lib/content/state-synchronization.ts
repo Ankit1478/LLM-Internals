@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const stateSynchronization: Article = {
-  module: 3,
+  module: 2,
   slug: 'state-synchronization',
   title: 'State Synchronization',
   description: 'Keeping state consistent across all agents',
@@ -170,6 +170,6 @@ When consistency is critical
 
 State Sync = Single source of truth. One state, many readers, always consistent.
 `,
-  previousTopic: { module: 3, slug: 'event-bus', title: 'Event Bus' },
-  nextTopic: { module: 3, slug: 'multi-agent-patterns', title: 'Multi-Agent Patterns' },
+  previousTopic: { module: 2, slug: 'event-bus', title: 'Event Bus' },
+  nextTopic: { module: 2, slug: 'multi-agent-patterns', title: 'Multi-Agent Patterns' },
 };

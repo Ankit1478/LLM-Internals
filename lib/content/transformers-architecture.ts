@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const transformersArchitecture: Article = {
-  module: 2,
+  module: 1,
   slug: 'transformers-architecture',
   title: 'Transformers Architecture',
   description: 'The brain behind ChatGPT, Claude, and all modern AI',
   readTime: 5,
-  previousTopic: { module: 2, slug: 'positional-encoding', title: '2. Positional Encoding' },
-  nextTopic: { module: 2, slug: 'self-attention', title: '4. Self-Attention Mechanism' },
+  previousTopic: { module: 1, slug: 'positional-encoding', title: '2. Positional Encoding' },
+  nextTopic: { module: 1, slug: 'self-attention', title: '4. Self-Attention Mechanism' },
   content: `# Transformers Architecture
 
 ## What is a Transformer?

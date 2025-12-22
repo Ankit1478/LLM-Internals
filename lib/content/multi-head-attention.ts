@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const multiHeadAttention: Article = {
-  module: 2,
+  module: 1,
   slug: 'multi-head-attention',
   title: 'Multi-Head Attention',
   description: 'How transformers use multiple attention mechanisms in parallel to capture different relationships',
   readTime: 7,
-  previousTopic: { module: 2, slug: 'self-attention', title: '4. Self-Attention Mechanism' },
-  nextTopic: { module: 2, slug: 'feed-forward-networks', title: '6. Feed-Forward Networks' },
+  previousTopic: { module: 1, slug: 'self-attention', title: '4. Self-Attention Mechanism' },
+  nextTopic: { module: 1, slug: 'feed-forward-networks', title: '6. Feed-Forward Networks' },
   content: `# Multi-Head Attention
 
 ## Part of Transformer Architecture

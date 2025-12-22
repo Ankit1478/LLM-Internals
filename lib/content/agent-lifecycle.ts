@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const agentLifecycle: Article = {
-  module: 3,
+  module: 2,
   slug: 'agent-lifecycle',
   title: 'Agent Lifecycle',
   description: 'Understanding how an AI Agent lives, works, and completes tasks',
@@ -395,6 +395,6 @@ flowchart TB
 
 **Remember:** Perceive → Think → Act → Check → Repeat!
 `,
-  previousTopic: { module: 3, slug: 'agent-vs-prompt-vs-workflow', title: 'Agent vs Prompt vs Workflow' },
-  nextTopic: { module: 3, slug: 'agent-environment-state', title: 'Environment, State, Actions, Observations' },
+  previousTopic: { module: 2, slug: 'agent-vs-prompt-vs-workflow', title: 'Agent vs Prompt vs Workflow' },
+  nextTopic: { module: 2, slug: 'agent-environment-state', title: 'Environment, State, Actions, Observations' },
 };

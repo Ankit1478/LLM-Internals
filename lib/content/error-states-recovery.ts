@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const errorStatesRecovery: Article = {
-  module: 3,
+  module: 2,
   slug: 'error-states-recovery',
   title: 'Error States & Recovery',
   description: 'Handle failures gracefully with error states',
@@ -108,6 +108,6 @@ flowchart TD
 
 **Always have an error state** - agents will fail, plan for it.
 `,
-  previousTopic: { module: 3, slug: 'transition-guards', title: 'Transition Guards' },
-  nextTopic: { module: 3, slug: 'loop-detection-termination', title: 'Loop Detection & Termination' },
+  previousTopic: { module: 2, slug: 'transition-guards', title: 'Transition Guards' },
+  nextTopic: { module: 2, slug: 'loop-detection-termination', title: 'Loop Detection & Termination' },
 };

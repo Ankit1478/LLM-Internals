@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const feedForwardNetworks: Article = {
-  module: 2,
+  module: 1,
   slug: 'feed-forward-networks',
   title: 'Feed-Forward Networks',
   description: 'How transformers process each token individually after attention',
   readTime: 6,
-  previousTopic: { module: 2, slug: 'multi-head-attention', title: '5. Multi-Head Attention' },
-  nextTopic: { module: 2, slug: 'layer-normalization', title: '7. Layer Normalization' },
+  previousTopic: { module: 1, slug: 'multi-head-attention', title: '5. Multi-Head Attention' },
+  nextTopic: { module: 1, slug: 'layer-normalization', title: '7. Layer Normalization' },
   content: `# Feed-Forward Networks
 
 ## Part of Transformer Architecture

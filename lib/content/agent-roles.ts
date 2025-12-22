@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const agentRoles: Article = {
-  module: 3,
+  module: 2,
   slug: 'agent-roles',
   title: 'Agent Roles',
   description: 'Specialized agents for different tasks - Supervisor, Worker, Planning, Memory, and more',
@@ -628,6 +628,6 @@ User: "Write a blog post about React hooks"
 | **Learn** | Reflection improves over time |
 | **Remember** | Memory creates continuity |
 `,
-  previousTopic: { module: 3, slug: 'agent-state-machines', title: 'State Machines for Agents' },
-  nextTopic: { module: 3, slug: 'supervisor-agent', title: 'Supervisor Agent' },
+  previousTopic: { module: 2, slug: 'agent-state-machines', title: 'State Machines for Agents' },
+  nextTopic: { module: 2, slug: 'supervisor-agent', title: 'Supervisor Agent' },
 };

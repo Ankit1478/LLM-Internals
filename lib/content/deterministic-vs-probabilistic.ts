@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const deterministicVsProbabilistic: Article = {
-  module: 3,
+  module: 2,
   slug: 'deterministic-vs-probabilistic',
   title: 'Deterministic vs Probabilistic Agents',
   description: 'Understanding predictable vs unpredictable AI agents',
@@ -405,6 +405,6 @@ flowchart TD
 - Need **creative** answer? → Probabilistic
 - Need **both**? → Hybrid agent!
 `,
-  previousTopic: { module: 3, slug: 'agent-environment-state', title: 'Environment, State, Actions, Observations' },
-  nextTopic: { module: 3, slug: 'stateless-vs-stateful', title: 'Stateless vs Stateful Agents' },
+  previousTopic: { module: 2, slug: 'agent-environment-state', title: 'Environment, State, Actions, Observations' },
+  nextTopic: { module: 2, slug: 'stateless-vs-stateful', title: 'Stateless vs Stateful Agents' },
 };

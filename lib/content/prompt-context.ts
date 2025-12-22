@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const promptContext: Article = {
-  module: 2,
+  module: 1,
   slug: 'prompt-context',
   title: 'Prompt Context Dynamics',
   description: 'How your words shape AI behavior and responses',
   readTime: 4,
-  previousTopic: { module: 2, slug: 'hallucinations', title: '21. Why Hallucinations Happen' },
-  nextTopic: { module: 2, slug: 'instruction-completion', title: '23. Instruction Following vs Completion' },
+  previousTopic: { module: 1, slug: 'hallucinations', title: '21. Why Hallucinations Happen' },
+  nextTopic: { module: 1, slug: 'instruction-completion', title: '23. Instruction Following vs Completion' },
   content: `# Prompt Context Dynamics
 
 ## What Is This?

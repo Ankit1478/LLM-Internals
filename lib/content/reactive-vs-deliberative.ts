@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const reactiveVsDeliberative: Article = {
-  module: 3,
+  module: 2,
   slug: 'reactive-vs-deliberative',
   title: 'Reactive vs Deliberative Agents',
   description: 'Quick reflexes vs deep thinking - when to use which',
@@ -366,6 +366,6 @@ await agent.respond("Plan a trip to Japan");   // Deliberative (plans)
 | **Match complexity** | Simple task → Reactive, Complex task → Deliberative |
 | **Cost matters** | Deliberation is expensive, use wisely |
 `,
-  previousTopic: { module: 3, slug: 'planner-worker-architecture', title: 'Planner + Worker Architecture' },
-  nextTopic: { module: 3, slug: 'agent-state-machines', title: 'State Machines for Agents' },
+  previousTopic: { module: 2, slug: 'planner-worker-architecture', title: 'Planner + Worker Architecture' },
+  nextTopic: { module: 2, slug: 'agent-state-machines', title: 'State Machines for Agents' },
 };

@@ -1,7 +1,7 @@
 import { Article } from './types';
 
 export const collaborativePattern: Article = {
-  module: 3,
+  module: 2,
   slug: 'collaborative-pattern',
   title: 'Collaborative (Debate & Consensus)',
   description: 'Agents discuss, debate, and reach agreement together',
@@ -541,6 +541,6 @@ Create a final solution that:
 
 Collaborative = Discussion + Consensus. Multiple agents propose, critique, and agree. Best for high-stakes decisions where quality beats speed.
 `,
-  previousTopic: { module: 3, slug: 'hierarchical-pattern', title: 'Hierarchical' },
-  nextTopic: { module: 3, slug: 'langgraph', title: 'LangGraph' },
+  previousTopic: { module: 2, slug: 'hierarchical-pattern', title: 'Hierarchical' },
+  nextTopic: { module: 2, slug: 'langgraph', title: 'LangGraph' },
 };

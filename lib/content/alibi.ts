@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const alibi: Article = {
-  module: 2,
+  module: 1,
   slug: 'alibi',
   title: 'ALiBi (Attention with Linear Biases)',
   description: 'The simplest way to help AI understand word positions',
   readTime: 4,
-  previousTopic: { module: 2, slug: 'rope', title: '12. RoPE (Rotary Position)' },
-  nextTopic: { module: 2, slug: 'kv-cache', title: '14. KV Cache' },
+  previousTopic: { module: 1, slug: 'rope', title: '12. RoPE (Rotary Position)' },
+  nextTopic: { module: 1, slug: 'kv-cache', title: '14. KV Cache' },
   content: `# ALiBi - Attention with Linear Biases
 
 ## What is ALiBi?

@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const hallucinations: Article = {
-  module: 2,
+  module: 1,
   slug: 'hallucinations',
   title: 'Why Hallucinations Happen',
   description: 'Why AI makes up confident-sounding nonsense',
   readTime: 5,
-  previousTopic: { module: 2, slug: 'reasoning-patterns', title: '20. Reasoning vs Pattern-Following' },
-  nextTopic: { module: 2, slug: 'prompt-context', title: '22. Prompt Context Dynamics' },
+  previousTopic: { module: 1, slug: 'reasoning-patterns', title: '20. Reasoning vs Pattern-Following' },
+  nextTopic: { module: 1, slug: 'prompt-context', title: '22. Prompt Context Dynamics' },
   content: `# Why Hallucinations Happen
 
 ## What Are Hallucinations?

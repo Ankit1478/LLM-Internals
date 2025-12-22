@@ -1,13 +1,13 @@
 import { Article } from './types';
 
 export const pagedAttention: Article = {
-  module: 2,
+  module: 1,
   slug: 'paged-attention',
   title: 'PagedAttention',
   description: 'Smart memory management for KV Cache - like managing books on shelves',
   readTime: 4,
-  previousTopic: { module: 2, slug: 'kv-cache', title: '14. KV Cache' },
-  nextTopic: { module: 2, slug: 'memory-implications', title: '16. Memory Implications' },
+  previousTopic: { module: 1, slug: 'kv-cache', title: '14. KV Cache' },
+  nextTopic: { module: 1, slug: 'memory-implications', title: '16. Memory Implications' },
   content: `# PagedAttention
 
 ## What is PagedAttention?
