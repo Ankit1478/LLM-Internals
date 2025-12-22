@@ -67,6 +67,10 @@ import { sequentialPipeline } from './sequential-pipeline';
 import { parallelExecution } from './parallel-execution';
 import { hierarchicalPattern } from './hierarchical-pattern';
 import { collaborativePattern } from './collaborative-pattern';
+import { langgraph } from './langgraph';
+import { autogen } from './autogen';
+import { crewai } from './crewai';
+import { vercelAiSdk } from './vercel-ai-sdk';
 
 // Re-export types
 export type { Article, Module, SubModule, Topic };
@@ -139,6 +143,10 @@ const articles: Record<string, Article> = {
   'parallel-execution': parallelExecution,
   'hierarchical-pattern': hierarchicalPattern,
   'collaborative-pattern': collaborativePattern,
+  'langgraph': langgraph,
+  'autogen': autogen,
+  'crewai': crewai,
+  'vercel-ai-sdk': vercelAiSdk,
 };
 
 // Docs Roadmap - Modules and Topics
