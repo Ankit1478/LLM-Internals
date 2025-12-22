@@ -20,30 +20,7 @@ export default function DocsHome() {
           </p>
         </div>
 
-        {/* Quick Start Card */}
-        <div
-          className="rounded-xl p-8 mb-12 border"
-          style={{ background: 'var(--card)', borderColor: 'var(--border)' }}
-        >
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div>
-              <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--foreground)' }}>
-                New to AI?
-              </h2>
-              <p style={{ color: 'var(--muted-foreground)' }}>
-                Start with the introduction and learn the fundamentals step by step.
-              </p>
-            </div>
-            <Link
-              href="/docs/0/introduction"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90"
-              style={{ background: 'var(--foreground)', color: 'var(--background)' }}
-            >
-              Get Started
-              <ChevronRight className="w-5 h-5" />
-            </Link>
-          </div>
-        </div>
+        
 
         {/* Modules Grid */}
         <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--foreground)' }}>
